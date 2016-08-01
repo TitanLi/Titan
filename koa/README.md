@@ -5,20 +5,27 @@ Generator長的會是一個以*符號開頭的function
 ```
 ```javascript
 function * (){
-
 }
-```
-##koa路由處理
-```javascript
-router.get('/apple',function * (){
-
-});
 ```
 ##koa_server
 -hello_world.js
 ##function中斷，執行下一個function，執行完後，繼續原function動作
 -yield_next.js
+##yield控制Generator的流程
+-yield_generator.js
+##利用yield將錯誤訊息帶入到callback的第一個參數,使第一個參數不為null,就會拋出錯誤訊息,讓yield外的try-catch去攔截
+-try_catch.js
 ##Koa application is not a 1-to-1 representation of a HTTP server
 -listen.js
 ##錯誤偵測
 -error_handling.js
+##koa路由處理
+-router.js
+##QueryString
+```javascript
+http://my_server/?name=x&msg=x
+console.log(this.request.query.name);
+console.log(this.request.query.msg);
+```
+##尋找當前目錄
+-static
