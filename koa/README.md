@@ -16,6 +16,8 @@ function * (){  }
 -router.js
 ##function中斷，執行下一個function，執行完後，繼續原function動作
 -yield_next.js
+##利用yield指定執行哪個function
+-yield_earmark.js
 ##yield控制Generator的流程
 -yield_generator.js
 ##yield變數宣告控制
