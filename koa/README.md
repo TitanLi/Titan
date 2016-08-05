@@ -14,6 +14,8 @@ function * (){  }
 -error_handling.js
 ##koa路由處理
 -router.js
+##重定路徑
+-router_redirect.js
 ##function中斷，執行下一個function，執行完後，繼續原function動作
 -yield_next.js
 ##利用yield指定執行哪個function
