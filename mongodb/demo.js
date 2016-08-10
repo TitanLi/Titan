@@ -32,22 +32,22 @@ db.open(function(err, db) {
             });
         });
 
-      // db.collection('mqtt',function(err,collection){
-      //     var removeData = {
-      //       'name' : 'apple'
-      //     }
-      //     collection.remove(removeData);
-      // });
+        // db.collection('mqtt',function(err,collection){
+        //     var removeData = {
+        //       'name' : 'apple'
+        //     }
+        //     collection.remove(removeData);
+        // });
 
-      db.collection('mqtt',function(err,collection){
-        var find = {
-          'name' : 'apple'
-        }
-        collection.findOne(find,function(err,item){
-          console.log(item['name']);
-          console.log(item.apple);
+        db.collection('mqtt', function(err, collection) {
+            var find = {
+                'name': 'apple'
+            }
+            collection.findOne(find, function(err, item) {
+                console.log(item['name']);
+                console.log(item.apple);
+            });
         });
-      });
 
     } else {
         console.log('mongodb open error');
