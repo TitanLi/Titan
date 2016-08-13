@@ -53,7 +53,7 @@ void loop(void) {
     mes = "";
     
     // wait until the card is taken away
-    while (nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &uid[0], &uidLength)) {}
+    //while (nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &uid[0], &uidLength)) {}
   }
   else
   {

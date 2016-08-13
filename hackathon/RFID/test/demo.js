@@ -7,5 +7,6 @@ server.on('connect',function(){
 });
 
 server.on('message',function(topic,message){
-  console.log(message.toString());
+  var mes = message;
+  console.log(JSON.parse(mes));
 });
