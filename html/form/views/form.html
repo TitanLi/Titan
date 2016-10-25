@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+    <body>
+      <table width="550" border="1">
+      <tr>
+        <th id="name">ID：</th>
+        <th id="num">姓名：</th>
+      </tr>
+
+      <% for(var i=0; i<formData.length; i++) { %>
+        <tr align="center">
+          <td headers="name"> <%= formData[i].name %> </td>
+          <td headers="num"> <%= formData[i].num %> </td>
+        </tr>
+      <% } %>
+    </table>
+
+      <form action="/" method="get">
+        <input type="submit" value="回主畫面" />
+      </form>
+
+    </body>
+</html>
