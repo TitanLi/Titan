@@ -1,0 +1,91 @@
+<section>
+	<div class="bird-view">
+		<h1>Before</h1>
+		<div class="mark">
+			<svg height="100" width="100">
+				<circle cx="50" cy="50" r="40" stroke="red" stroke-width="3" fill="none" />
+			</svg>
+		</div>
+	</div>
+	<div class="after-earthquake">
+		<h1>After</h1>
+		
+	</div>
+	<div class="payload">
+		<div class="ui basic very padded segment">
+			<div class="ui grid" id="api-data">
+				<div class="row">
+					<div class="column">
+						<h1 v-show="status == 'error'"><i class="material-icons">portable_wifi_off</i> No Signal !</h1>
+						<div class="ui basic very padded segment" v-show="!status">
+							<div class="ui hidden divider"></div>
+							<div class="ui hidden divider"></div>
+							<div class="ui active inverted dimmer">
+								<div class="ui text loader">Loading</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" v-show="status == 'success'">
+					<div class="one wide column">
+						<div class="point-red">
+							<svg height="20" width="20">
+								<circle cx="10" cy="10" r="3" fill="#e60000" fill-opacity="0.9" />
+								<circle cx="10" cy="10" r="10" fill="#ff1a1a" fill-opacity="0.4">
+									<animate attributeType="XML"
+										attributeName="r"
+										from="2" to="10"
+										dur="1.2s"
+										repeatCount="indefinite"
+									/>
+								<circle/>
+							</svg>
+						</div>
+					</div>
+					<div class="fifteen wide column">
+						<h3>
+							ID :  
+							{{ payloadOne.peopleID }} <small>{{ payloadOne.date }}</small>
+							<br />
+							Sound : 
+							{{ payloadOne.sou }}
+							<br />
+							Air Quality : 
+							{{ payloadOne.air }}
+							<br />
+							Humidity : 
+							{{ payloadOne.hum }}
+							<br />
+							Temperature : 
+							{{ payloadOne.tmp }}
+							<br />
+							Gas : 
+							{{ payloadOne.gas }}
+							<br />
+							Sign Data Base : 
+							{{ payloadOne.sdb }}
+						</h3>
+						<div class="ui hidden divider"></div>
+					</div>
+				</div>
+				<div class="row" v-show="status == 'success'">
+					<div class="column">
+						<h3>Sign Data Base :</h3>
+						<div id="ct-chart-sdb-one"></div>
+						<h3>Sound : </h3>
+						<div id="ct-chart-sound-one"></div>
+						<h3>Air Quality : </h3>
+						<div id="ct-chart-air-one"></div>
+						<h3>Humidity : </h3>
+						<div id="ct-chart-hum-one"></div>
+						<h3>Temperature : </h3>
+						<div id="ct-chart-temp-one"></div>
+						<h3>Gas : </h3>
+						<div id="ct-chart-gas-one"></div>
+						<hr />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

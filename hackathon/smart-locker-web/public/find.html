@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+    <body>
+      <h3 >查詢結果</h3>
+
+      <h4><%= findName %> </h4>
+
+      <table width="550" border="1">
+      <tr>
+        <th id="nfcID">ID：</th>
+        <th id="name">姓名：</th>
+      </tr>
+
+      <% for(var i=0; i<findName.length; i++) { %>
+        <tr align="center">
+          <td headers="nfcID"> <%= findName[i].NFC %> </td>
+          <td headers="name"> <%= findName[i].name %> </td>
+        </tr>
+      <% } %>
+    </table>
+
+      <form action="/" method="get">
+        <input type="submit" value="回主畫面" />
+      </form>
+
+    </body>
+</html>

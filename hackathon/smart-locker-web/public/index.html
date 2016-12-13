@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+    <style>
+      img {
+        width:100%;
+      }
+      </style>
+  </head>
+    <body>
+      <img src="http://otc.nutc.edu.tw/ezfiles/6/1006/img/492/abbb.gif" alt="HTML5 Icon" id="onepice">
+      <script type="text/javascript">
+			var strUrl = location.search.slice(1);
+    		document.getElementById('onepice').src = __dirname +"/"+strUrl+".gif";
+		  </script>
+
+    <form action="/insert" method="post">
+      <input type="submit" value="新增"  style="width:120px;height:40px;font-size:20px;"/>
+    </form>
+
+    <form action="/update" method="post">
+      <input type="submit" value="修改"  style="width:120px;height:40px;font-size:20px;"/>
+    </form>
+
+    <form action="/remove" method="post">
+      <input type="submit" value="刪除"  style="width:120px;height:40px;font-size:20px;"/>
+    </form>
+
+    <form action="/find" method="post">
+      <input type="submit" value="查詢"  style="width:120px;height:40px;font-size:20px;"/>
+    </form>
+
+    </body>
+</html>

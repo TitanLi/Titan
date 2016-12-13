@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+    <body>
+      <h3 style="float:left;">應繳金額</h3>
+      <div style="margin-left: 100px;">
+      <img src="http://i.imgur.com/NeCicL1.jpg" alt="HTML5 Icon" id="onepice" style="width:120px;height:100px;"/>
+      </div>
+      <input type="text"  id = "t" value="a" >
+
+      <script type="text/javascript">
+			var strUrl = location.search.slice(1);
+    		document.getElementById('t').value = strUrl;
+		  </script>
+
+      <form action="/main" method="post">
+
+        <input type="submit" value="回主畫面" />
+      </form>
+
+    </body>
+</html>

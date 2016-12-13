@@ -1,0 +1,4 @@
+{
+        "broker" : "mqtt://test.mosquitto.org",
+        "topic" : "/RFID/v1/NUTC"
+}
