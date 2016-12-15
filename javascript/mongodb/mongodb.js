@@ -54,6 +54,28 @@ db.open(function(err, db) {
                  console.log(items);
              });
         });
+
+        db.collection('mqtt', function(err, collection) {
+              collection.find().sort({name: 1}).toArray(function(err, items) {
+                 console.log(items);
+             });
+        });
+
+        db.collection('mqtt', function(err, collection) {
+              collection.find().limit(1).toArray(function(err, items) {
+                 console.log(items);
+             });
+        });
+
+        var options = {
+                        "limit": 3,
+                        "sort": {name : 1}
+                      };
+        db.collection('mqtt', function(err, collection) {
+              collection.find({},options).toArray(function(err, items) {
+                 console.log(items);
+             });
+        });
     } else {
         console.log('mongodb open error');
     }
