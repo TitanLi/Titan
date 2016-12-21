@@ -76,6 +76,20 @@ db.open(function(err, db) {
                  console.log(items);
              });
         });
+
+        db.open(function(err, db) {
+          db.authenticate('cardiagoUser', 'cardiagoReader_iii_05076416', function(err, res) {
+            if (!err) {
+              console.log('mongodb are connected');
+              db.collection('clientGroupEnergy', function(err, collection) {
+
+              });
+            } else {
+              console.log('mongodb open error');
+            }
+          });
+        });
+        
     } else {
         console.log('mongodb open error');
     }

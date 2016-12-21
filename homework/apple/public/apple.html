@@ -1,0 +1,121 @@
+<html>
+  <head>
+    <title>WebSocket</title>
+    <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+
+    <script>
+      var wsUrl = 'ws://127.0.0.1:3000';
+
+      var websocket = new WebSocket(wsUrl);
+
+      websocket.onopen = function(evt){
+        console.log('Connected');
+        websocket.send('Hello Server!');
+      };
+
+      websocket.onclose = function(evt){
+        console.log('DisConnected');
+      };
+
+      websocket.onmessage = function(evt){
+        console.log('Got Message');
+        console.log(evt.data);
+        var msg = JSON.parse(evt.data);
+        if(msg.name == "areaA" && msg.food>0){
+          document.getElementById("buttonA").style = "background-color:red;";
+        }else if(msg.name == "areaB" && msg.food>0){
+          document.getElementById("buttonB").style = "background-color:red;";
+        }else if(msg.name == "areaC" && msg.food>0) {
+          document.getElementById("buttonC").style = "background-color:red;";
+        }else if(msg.name == "areaA" && msg.food==0){
+          document.getElementById("buttonA").style = "background-color:green;";
+        }else if(msg.name == "areaB" && msg.food==0){
+          document.getElementById("buttonB").style = "background-color:green;";
+        }else if(msg.name == "areaC" && msg.food==0){
+          document.getElementById("buttonC").style = "background-color:green;";
+        }
+
+        // if(msg.name == "areaA" && msg.food>0){
+        //   document.getElementById("buttonA").style = "background-color:red;";
+        // }else{
+        //   document.getElementById("buttonA").style = "background-color:green;";
+        // }
+        //
+        // if(msg.name == "areaB" && msg.food>0){
+        //   document.getElementById("buttonB").style = "background-color:red;";
+        // }else{
+        //   document.getElementById("buttonB").style = "background-color:green;";
+        // }
+        //
+        // if(msg.name == "areaC" && msg.food>0) {
+        //   document.getElementById("buttonC").style = "background-color:red;";
+        // }else{
+        //   document.getElementById("buttonC").style = "background-color:green;";
+        // }
+      };
+
+      websocket.onerror = function(evt){
+        console.log('Something\'s wrong');
+      };
+
+      $(function(){
+        $('#send').on('click',function(){
+          websocket.send($('#msg').val());
+          $('#msg').val('');
+        });
+      });
+
+    </script>
+  </head>
+  <body>
+    <div style="top:190px;left:960px;position:absolute;">
+      <form action="/" method="get">
+        <input type="submit" value="" id="buttonA" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:300px;left:1000px;position:absolute;">
+      <form action="/" method="get">
+        <input type="submit" value="" id="buttonB" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:260px;left:860px;position:absolute;">
+      <form action="/" method="get">
+        <input type="submit" value="" id="buttonC" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:340px;left:830px;position:absolute;">
+      <form action="/" method="get">
+        <input type="submit" value="" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:320px;left:630px;position:absolute;">
+      <form action="/" method="get">
+        <input type="submit" value="" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:380px;left:600px;position:absolute;">
+      <form action="/" method="get">
+        <input type="submit" value="" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:460px;left:540px;position:absolute;">
+      <form action="/" method="get">
+        <input type="submit" value="" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:480px;left:660px;position:absolute;">
+      <form action="/" method="get">
+        <input type="submit" value="" style="background-color:green;"/>
+      </form>
+    </div>
+    <img src="./picture/8map_b1.jpg" alt="Mountain View" align=middle style="width: 100%; height: 100%">
+
+  </body>
+</html>

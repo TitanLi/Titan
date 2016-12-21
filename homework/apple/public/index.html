@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <title>WebSocket</title>
+    <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+    <script>
+      var wsUrl = 'ws://127.0.0.1:3000';
+
+      var websocket = new WebSocket(wsUrl);
+
+      websocket.onopen = function(evt){
+        console.log('Connected');
+        websocket.send('Hello Server!');
+      };
+
+      websocket.onclose = function(evt){
+        console.log('DisConnected');
+      };
+
+      websocket.onmessage = function(evt){
+        console.log('Got Message');
+        console.log(evt.data);
+        var msg = JSON.parse(evt.data);
+        if(msg.name == "areaA"){
+          document.getElementById("areaA").innerHTML = msg.name;
+          document.getElementById("foodA").innerHTML = msg.food;
+          document.getElementById("peopleA").innerHTML = msg.people;
+          document.getElementById("deaA").innerHTML = msg.dea;
+        }else if(msg.name == "areaB"){
+          document.getElementById("areaB").innerHTML = msg.name;
+          document.getElementById("foodB").innerHTML = msg.food;
+          document.getElementById("peopleB").innerHTML = msg.people;
+          document.getElementById("deaB").innerHTML = msg.dea;
+        }else {
+          document.getElementById("areaC").innerHTML = msg.name;
+          document.getElementById("foodC").innerHTML = msg.food;
+          document.getElementById("peopleC").innerHTML = msg.people;
+          document.getElementById("deaC").innerHTML = msg.dea;
+        }
+      };
+
+      websocket.onerror = function(evt){
+        console.log('Something\'s wrong');
+      };
+
+      $(function(){
+        $('#send').on('click',function(){
+          websocket.send($('#msg').val());
+          $('#msg').val('');
+        });
+      });
+
+    </script>
+  </head>
+  <body>
+    <form action="/textview" method="get">
+      <input type="submit" value="回首頁" />
+    </form>
+
+    <table style="width:100%">
+      <tr align="center">
+        <th id="area">地區</th>
+        <th id="food">所需食物量</th>
+        <th id="people">受傷人數</th>
+        <th id="dea">死亡人數</th>
+      </tr>
+
+      <tr>
+        <th id="areaA">0</th>
+        <th id="foodA">0</th>
+        <th id="peopleA">0</th>
+        <th id="deaA">0</th>
+      </tr>
+
+      <tr>
+        <th id="areaB">0</th>
+        <th id="foodB">0</th>
+        <th id="peopleB">0</th>
+        <th id="deaB">0</th>
+      </tr>
+
+      <tr>
+        <th id="areaC">0</th>
+        <th id="foodC">0</th>
+        <th id="peopleC">0</th>
+        <th id="deaC">0</th>
+      </tr>
+    </table>
+  </body>
+</html>
