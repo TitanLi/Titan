@@ -1,0 +1,158 @@
+<html>
+  <head>
+    <title>重大災害輔助系統</title>
+    <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+    <script>
+      var wsUrl = 'ws://127.0.0.1:3000';
+
+      var websocket = new WebSocket(wsUrl);
+
+      websocket.onopen = function(evt){
+        console.log('Connected');
+        websocket.send('Hello Server!');
+      };
+
+      websocket.onclose = function(evt){
+        console.log('DisConnected');
+      };
+
+      websocket.onmessage = function(evt){
+        console.log('Got Message');
+        console.log(evt.data);
+        var msg = JSON.parse(evt.data);
+        for(var i=0 ; i<msg.areaA.length ; i++){
+          if(msg.areaA[i].name == "areaA"){
+            document.getElementById("area"+(i+1)).innerHTML = msg.areaA[i].name;
+            document.getElementById("food"+(i+1)).innerHTML = msg.areaA[i].food;
+            document.getElementById("people"+(i+1)).innerHTML = msg.areaA[i].people;
+            document.getElementById("dea"+(i+1)).innerHTML = msg.areaA[i].dea;
+            document.getElementById("time"+(i+1)).innerHTML = new Date(msg.areaA[i].date);
+          }
+        }
+        // if(msg.areaA[0].name == "areaA"){
+        //   var table = document.getElementById("tableA");
+        //   var row = table.insertRow(table.rows.length);
+        //   var areaObj = ["name","food","people","dea"];
+        //   for(var a=0 ; a<msg.areaA.length ; a++){
+        //     for(var i=0 ; i<4 ; i++){
+        //       var cell = row.insertCell();
+        //       cell.setAttribute('align','center');
+        //       cell.innerHTML='<th>msg.areaA[a].areaObj[i]</th>';
+        //     }
+        //   }
+        //   document.getElementById("areaA").innerHTML = msg.areaA[0].name;
+        //   document.getElementById("foodA").innerHTML = msg.areaA[0].food;
+        //   document.getElementById("peopleA").innerHTML = msg.areaA[0].people;
+        //   document.getElementById("deaA").innerHTML = msg.areaA[0].dea;
+        // }
+      };
+
+      websocket.onerror = function(evt){
+        console.log('Something\'s wrong');
+      };
+
+      $(function(){
+        $('#send').on('click',function(){
+          websocket.send($('#msg').val());
+          $('#msg').val('');
+        });
+      });
+
+    </script>
+  </head>
+  <body>
+    <form action="/" method="get">
+      <input type="submit" value="回首頁" />
+    </form>
+
+    <table style="width:100%" id="tableA">
+      <tr align="center">
+        <th id="area">地區</th>
+        <th id="food">所需食物量</th>
+        <th id="people">受傷人數</th>
+        <th id="dea">死亡人數</th>
+        <th id="time">時間</th>
+      </tr>
+
+      <tr>
+        <th id="area1"></th>
+        <th id="food1"></th>
+        <th id="people1"></th>
+        <th id="dea1"></th>
+        <th id="time1"></th>
+      </tr>
+
+      <tr>
+        <th id="area2"></th>
+        <th id="food2"></th>
+        <th id="people2"></th>
+        <th id="dea2"></th>
+        <th id="time2"></th>
+      </tr>
+
+      <tr>
+        <th id="area3"></th>
+        <th id="food3"></th>
+        <th id="people3"></th>
+        <th id="dea3"></th>
+        <th id="time3"></th>
+      </tr>
+
+      <tr>
+        <th id="area4"></th>
+        <th id="food4"></th>
+        <th id="people4"></th>
+        <th id="dea4"></th>
+        <th id="time4"></th>
+      </tr>
+
+      <tr>
+        <th id="area5"></th>
+        <th id="food5"></th>
+        <th id="people5"></th>
+        <th id="dea5"></th>
+        <th id="time5"></th>
+      </tr>
+
+      <tr>
+        <th id="area6"></th>
+        <th id="food6"></th>
+        <th id="people6"></th>
+        <th id="dea6"></th>
+        <th id="time6"></th>
+      </tr>
+
+      <tr>
+        <th id="area7"></th>
+        <th id="food7"></th>
+        <th id="people7"></th>
+        <th id="dea7"></th>
+        <th id="time7"></th>
+      </tr>
+
+      <tr>
+        <th id="area8"></th>
+        <th id="food8"></th>
+        <th id="people8"></th>
+        <th id="dea8"></th>
+        <th id="time8"></th>
+      </tr>
+
+      <tr>
+        <th id="area9"></th>
+        <th id="food9"></th>
+        <th id="people9"></th>
+        <th id="dea9"></th>
+        <th id="time9"></th>
+      </tr>
+
+      <tr>
+        <th id="area10"></th>
+        <th id="food10"></th>
+        <th id="people10"></th>
+        <th id="dea10"></th>
+        <th id="time10"></th>
+      </tr>
+    </table>
+  </body>
+</html>

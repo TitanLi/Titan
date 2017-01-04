@@ -1,7 +1,8 @@
 <html>
   <head>
-    <title>WebSocket</title>
+    <title>重大災害輔助系統</title>
     <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+
     <script>
       var wsUrl = 'ws://127.0.0.1:3000';
 
@@ -20,21 +21,38 @@
         console.log('Got Message');
         console.log(evt.data);
         var msg = JSON.parse(evt.data);
-        if(msg.name == "areaA"){
-          document.getElementById("areaA").innerHTML = msg.name;
-          document.getElementById("foodA").innerHTML = msg.food;
-          document.getElementById("peopleA").innerHTML = msg.people;
-          document.getElementById("deaA").innerHTML = msg.dea;
-        }else if(msg.name == "areaB"){
-          document.getElementById("areaB").innerHTML = msg.name;
-          document.getElementById("foodB").innerHTML = msg.food;
-          document.getElementById("peopleB").innerHTML = msg.people;
-          document.getElementById("deaB").innerHTML = msg.dea;
-        }else {
-          document.getElementById("areaC").innerHTML = msg.name;
-          document.getElementById("foodC").innerHTML = msg.food;
-          document.getElementById("peopleC").innerHTML = msg.people;
-          document.getElementById("deaC").innerHTML = msg.dea;
+        if(msg.name == "areaA" && msg.food>0){
+          document.getElementById("buttonA").style = "background-color:red;";
+        }else if(msg.name == "areaB" && msg.food>0){
+          document.getElementById("buttonB").style = "background-color:red;";
+        }else if(msg.name == "areaC" && msg.food>0) {
+          document.getElementById("buttonC").style = "background-color:red;";
+        }else if(msg.name == "areaD" && msg.food>0) {
+          document.getElementById("buttonD").style = "background-color:red;";
+        }else if(msg.name == "areaE" && msg.food>0) {
+          document.getElementById("buttonE").style = "background-color:red;";
+        }else if(msg.name == "areaF" && msg.food>0) {
+          document.getElementById("buttonF").style = "background-color:red;";
+        }else if(msg.name == "areaG" && msg.food>0) {
+          document.getElementById("buttonG").style = "background-color:red;";
+        }else if(msg.name == "areaH" && msg.food>0) {
+          document.getElementById("buttonH").style = "background-color:red;";
+        }else if(msg.name == "areaA" && msg.food==0){
+          document.getElementById("buttonA").style = "background-color:green;";
+        }else if(msg.name == "areaB" && msg.food==0){
+          document.getElementById("buttonB").style = "background-color:green;";
+        }else if(msg.name == "areaC" && msg.food==0){
+          document.getElementById("buttonC").style = "background-color:green;";
+        }else if(msg.name == "areaD" && msg.food==0){
+          document.getElementById("buttonD").style = "background-color:green;";
+        }else if(msg.name == "areaE" && msg.food==0){
+          document.getElementById("buttonE").style = "background-color:green;";
+        }else if(msg.name == "areaF" && msg.food==0){
+          document.getElementById("buttonF").style = "background-color:green;";
+        }else if(msg.name == "areaG" && msg.food==0){
+          document.getElementById("buttonG").style = "background-color:green;";
+        }else if(msg.name == "areaH" && msg.food==0){
+          document.getElementById("buttonH").style = "background-color:green;";
         }
       };
 
@@ -52,38 +70,61 @@
     </script>
   </head>
   <body>
-    <form action="/textview" method="get">
-      <input type="submit" value="回首頁" />
-    </form>
+    <div style="top:140px;left:990px;position:absolute;">
+      <form action="/areaA" method="get">
+        <input type="submit" value="" id="buttonA" style="background-color:green;"/>
+      </form>
+    </div>
 
-    <table style="width:100%">
-      <tr align="center">
-        <th id="area">地區</th>
-        <th id="food">所需食物量</th>
-        <th id="people">受傷人數</th>
-        <th id="dea">死亡人數</th>
-      </tr>
+    <div style="top:200px;left:890px;position:absolute;">
+      <form action="/areaB" method="get">
+        <input type="submit" value="" id="buttonB" style="background-color:green;"/>
+      </form>
+    </div>
 
-      <tr>
-        <th id="areaA">0</th>
-        <th id="foodA">0</th>
-        <th id="peopleA">0</th>
-        <th id="deaA">0</th>
-      </tr>
+    <div style="top:250px;left:1030px;position:absolute;">
+      <form action="/areaC" method="get">
+        <input type="submit" value="" id="buttonC" style="background-color:green;"/>
+      </form>
+    </div>
 
-      <tr>
-        <th id="areaB">0</th>
-        <th id="foodB">0</th>
-        <th id="peopleB">0</th>
-        <th id="deaB">0</th>
-      </tr>
+    <div style="top:290px;left:860px;position:absolute;">
+      <form action="/areaD" method="get">
+        <input type="submit" value="" id="buttonD" style="background-color:green;"/>
+      </form>
+    </div>
 
-      <tr>
-        <th id="areaC">0</th>
-        <th id="foodC">0</th>
-        <th id="peopleC">0</th>
-        <th id="deaC">0</th>
-      </tr>
-    </table>
+    <div style="top:240px;left:660px;position:absolute;">
+      <form action="/areaE" method="get">
+        <input type="submit" value="" id="buttonE" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:330px;left:630px;position:absolute;">
+      <form action="/areaF" method="get">
+        <input type="submit" value="" id="buttonF" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:360px;left:700px;position:absolute;">
+      <form action="/areaG" method="get">
+        <input type="submit" value="" id="buttonG" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:410px;left:570px;position:absolute;">
+      <form action="/areaH" method="get">
+        <input type="submit" value="" id="buttonH" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:561px;left:990px;position:absolute;">
+      <form action="/textview" method="get">
+        <input type="submit" value="總覽" style="background-color:green;width:100px;height:30px;"/>
+      </form>
+    </div>
+
+    <img src="./picture/8map_b1.jpg" alt="Mountain View" align=middle style="width: 100%; height: 100%">
+
   </body>
 </html>
