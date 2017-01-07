@@ -2,9 +2,9 @@ var koa = require('koa');
 var Router = require('koa-router');
 var serve = require('koa-static');
 var websockify = require('koa-websocket');
+var views = require('koa-views');
 var events = require('events');
 var mongodb = require('mongodb');
-var views = require('koa-views');
 
 var app = koa();
 var socket = websockify(app);
