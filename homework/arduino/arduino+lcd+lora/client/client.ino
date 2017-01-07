@@ -113,7 +113,7 @@ void loop()
         lcd.print("Successful");
            lcd.setCursor(0, 1); 
         lcd.print("#"+ (String)name0+"#"+(String)food0 +"#"+(String)peo0+"#"+(String)dea0);
-         for(int ad = 0;ad<10;ad++){
+         for(int ad = 0;ad<100;ad++){
           mySerial.println((String)name0+"#"+(String)food0 +"#"+(String)peo0+"#"+(String)dea0);
        //10delay(100);
           }

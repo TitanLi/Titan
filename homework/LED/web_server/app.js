@@ -3,8 +3,8 @@ var Router = require('koa-router');
 var mongo = require('mongodb');
 var bodyParser = require('koa-bodyparser');
 var views = require('koa-views');     //npm install koa-views@4.1.0
-var mqtt = require('mqtt');
 var serve = require('koa-static');
+var mqtt = require('mqtt');
 var websockify = require('koa-websocket');
 var events = require('events');
 

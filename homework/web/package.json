@@ -1,11 +1,20 @@
 {
   "name": "apple",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Titan",
-  "license": "ISC"
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "events": "^1.1.1",
+    "koa": "^1.2.4",
+    "koa-bodyparser": "^2.3.0",
+    "koa-router": "^7.1.0",
+    "koa-views": "^4.1.0",
+    "koa-websocket": "^2.1.0",
+    "mongodb": "^2.2.19"
+  }
 }
