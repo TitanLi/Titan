@@ -1,0 +1,150 @@
+<html>
+  <head>
+    <title>重大災害輔助系統</title>
+    <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+    <script>
+      var wsUrl = 'ws://127.0.0.1:3000';
+
+      var websocket = new WebSocket(wsUrl);
+
+      websocket.onopen = function(evt){
+        console.log('Connected');
+        websocket.send('Hello Server!');
+      };
+
+      websocket.onclose = function(evt){
+        console.log('DisConnected');
+      };
+
+      websocket.onmessage = function(evt){
+        console.log('Got Message');
+        console.log(evt.data);
+        var msg = JSON.parse(evt.data);
+        if(msg.name == "areaA"){
+          document.getElementById("areaA").innerHTML = msg.name;
+          document.getElementById("foodA").innerHTML = msg.food;
+          document.getElementById("peopleA").innerHTML = msg.people;
+          document.getElementById("deaA").innerHTML = msg.dea;
+        }else if(msg.name == "areaB"){
+          document.getElementById("areaB").innerHTML = msg.name;
+          document.getElementById("foodB").innerHTML = msg.food;
+          document.getElementById("peopleB").innerHTML = msg.people;
+          document.getElementById("deaB").innerHTML = msg.dea;
+        }else if(msg.name == "areaC"){
+          document.getElementById("areaC").innerHTML = msg.name;
+          document.getElementById("foodC").innerHTML = msg.food;
+          document.getElementById("peopleC").innerHTML = msg.people;
+          document.getElementById("deaC").innerHTML = msg.dea;
+        }else if(msg.name == "areaD"){
+          document.getElementById("areaD").innerHTML = msg.name;
+          document.getElementById("foodD").innerHTML = msg.food;
+          document.getElementById("peopleD").innerHTML = msg.people;
+          document.getElementById("deaD").innerHTML = msg.dea;
+        }else if(msg.name == "areaE"){
+          document.getElementById("areaE").innerHTML = msg.name;
+          document.getElementById("foodE").innerHTML = msg.food;
+          document.getElementById("peopleE").innerHTML = msg.people;
+          document.getElementById("deaE").innerHTML = msg.dea;
+        }else if(msg.name == "areaF"){
+          document.getElementById("areaF").innerHTML = msg.name;
+          document.getElementById("foodF").innerHTML = msg.food;
+          document.getElementById("peopleF").innerHTML = msg.people;
+          document.getElementById("deaF").innerHTML = msg.dea;
+        }else if(msg.name == "areaG"){
+          document.getElementById("areaG").innerHTML = msg.name;
+          document.getElementById("foodG").innerHTML = msg.food;
+          document.getElementById("peopleG").innerHTML = msg.people;
+          document.getElementById("deaG").innerHTML = msg.dea;
+        }else if(msg.name == "areaH"){
+          document.getElementById("areaH").innerHTML = msg.name;
+          document.getElementById("foodH").innerHTML = msg.food;
+          document.getElementById("peopleH").innerHTML = msg.people;
+          document.getElementById("deaH").innerHTML = msg.dea;
+        }
+      };
+
+      websocket.onerror = function(evt){
+        console.log('Something\'s wrong');
+      };
+
+      $(function(){
+        $('#send').on('click',function(){
+          websocket.send($('#msg').val());
+          $('#msg').val('');
+        });
+      });
+
+    </script>
+  </head>
+  <body>
+    <form action="/" method="get">
+      <input type="submit" value="回首頁" />
+    </form>
+
+    <table style="width:100%">
+      <tr align="center">
+        <th id="area">地區</th>
+        <th id="food">所需食物量</th>
+        <th id="people">受傷人數</th>
+        <th id="dea">死亡人數</th>
+      </tr>
+
+      <tr>
+        <th id="areaA">0</th>
+        <th id="foodA">0</th>
+        <th id="peopleA">0</th>
+        <th id="deaA">0</th>
+      </tr>
+
+      <tr>
+        <th id="areaB">0</th>
+        <th id="foodB">0</th>
+        <th id="peopleB">0</th>
+        <th id="deaB">0</th>
+      </tr>
+
+      <tr>
+        <th id="areaC">0</th>
+        <th id="foodC">0</th>
+        <th id="peopleC">0</th>
+        <th id="deaC">0</th>
+      </tr>
+
+      <tr>
+        <th id="areaD">0</th>
+        <th id="foodD">0</th>
+        <th id="peopleD">0</th>
+        <th id="deaD">0</th>
+      </tr>
+
+      <tr>
+        <th id="areaE">0</th>
+        <th id="foodE">0</th>
+        <th id="peopleE">0</th>
+        <th id="deaE">0</th>
+      </tr>
+
+      <tr>
+        <th id="areaF">0</th>
+        <th id="foodF">0</th>
+        <th id="peopleF">0</th>
+        <th id="deaF">0</th>
+      </tr>
+
+      <tr>
+        <th id="areaG">0</th>
+        <th id="foodG">0</th>
+        <th id="peopleG">0</th>
+        <th id="deaG">0</th>
+      </tr>
+
+      <tr>
+        <th id="areaH">0</th>
+        <th id="foodH">0</th>
+        <th id="peopleH">0</th>
+        <th id="deaH">0</th>
+      </tr>
+
+    </table>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+{ "_id" : { "$oid" : "5870dc5f41aa3e223cee62be" }, "name" : "LED1", "ledSta" : 1 }
+{ "_id" : { "$oid" : "5870dc5f41aa3e223cee62bf" }, "name" : "LED2", "ledSta" : 1 }
+{ "_id" : { "$oid" : "5870dc5f41aa3e223cee62c0" }, "name" : "LED3", "ledSta" : 1, "data" : 393 }
+{ "_id" : { "$oid" : "5870dc5f41aa3e223cee62c1" }, "name" : "LED4", "ledSta" : 1 }

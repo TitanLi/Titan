@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript"
+         src="127.0.0.1:3000/get">
+</script>
+<style type="text/css">
+    div {
+      background-color:#FF0000;
+    }
+    input[type=submit] {
+    padding:10px 10px;
+    background:#ccc;
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+}
+
+</style>
+  <head>
+    <title>Page Title</title>
+
+    <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+
+    <script>
+      var wsUrl = 'ws://127.0.0.1:3000';
+
+      var websocket = new WebSocket(wsUrl);
+
+      websocket.onopen = function(evt){
+        console.log('Connected');
+        websocket.send('Hello Server!');
+      };
+
+      websocket.onclose = function(evt){
+        console.log('DisConnected');
+      };
+
+      websocket.onmessage = function(evt){
+        console.log('Got Message');
+        console.log(evt.data);
+        var msg = JSON.parse(evt.data);
+        document.getElementById("picture1").src = "./picture/"+msg.LED1.picture;
+        document.getElementById("picture2").src = "./picture/"+msg.LED2.picture;
+        document.getElementById("picture3").src = "./picture/"+msg.LED3.picture;
+        document.getElementById("picture4").src = "./picture/"+msg.LED4.picture;
+        document.getElementById("button1").action = msg.LED1.router;
+        document.getElementById("button2").action = msg.LED2.router;
+        document.getElementById("button3").action = msg.LED3.router;
+        document.getElementById("button4").action = msg.LED4.router;
+        document.getElementById("val1").value = msg.LED1.val;
+        document.getElementById("val2").value = msg.LED2.val;
+        document.getElementById("val3").value = msg.LED3.val;
+        document.getElementById("val4").value = msg.LED4.val;
+        document.getElementById("labelData").innerHTML = msg.LED3.data;
+      };
+
+      websocket.onerror = function(evt){
+        console.log('Something\'s wrong');
+      };
+
+      $(function(){
+        $('#send').on('click',function(){
+          websocket.send($('#msg').val());
+          $('#msg').val('');
+        });
+      });
+
+    </script>
+  </head>
+    <body>
+      <table width="910" border="1">
+      <tr>
+        <th id="LED1">LED1</th>
+        <th id="LED2">LED2</th>
+        <th id="LED3">LED3</th>
+        <th id="LED4">LED4</th>
+      </tr>
+
+        <tr align="center">
+          <td headers="led1"> <img src="./picture/dark.png" alt="Mountain View" align=middle id="picture1" style="width: 100%; height: 100%"> </td>
+          <td headers="led1"> <img src="./picture/dark.png" alt="Mountain View" align=middle id="picture2" style="width: 100%; height: 100%"> </td>
+          <td headers="led1"> <img src="./picture/dark.png" alt="Mountain View" align=middle id="picture3" style="width: 100%; height: 100%"> </td>
+          <td headers="led1"> <img src="./picture/dark.png" alt="Mountain View" align=middle id="picture4" style="width: 100%; height: 100%"> </td>
+        </tr>
+        <tr align="center">
+          <td headers="led1but">
+            <form action='/' method="get" id="button1">
+                <input type="submit" value="開" id="val1" style="font-size:16px;"/>
+            </form>
+          </td>
+          <td headers="led2but">
+            <form action='/' method="get" id="button2">
+              <input type="submit" value="開" id="val2" style="font-size:16px;"/>
+            </form>
+          </td>
+          <td headers="led3but">
+            <form action='/' method="get" id="button3">
+              <input type="submit" value="開" id="val3" style="font-size:16px;"/>
+            </form>
+          </td>
+          <td headers="led4but">
+            <form action='/' method="get" id="button4">
+              <input type="submit" value="開" id="val4" style="font-size:16px;"/>
+            </form>
+          </td>
+        </tr>
+      </table>
+      <h1>光敏電阻值：<label id=labelData>Male</label></h1>
+    </body>
+</html>

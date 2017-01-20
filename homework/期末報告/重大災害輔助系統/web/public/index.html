@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <title>重大災害輔助系統</title>
+    <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+
+    <script>
+      var wsUrl = 'ws://127.0.0.1:3000';
+
+      var websocket = new WebSocket(wsUrl);
+
+      websocket.onopen = function(evt){
+        console.log('Connected');
+        websocket.send('Hello Server!');
+      };
+
+      websocket.onclose = function(evt){
+        console.log('DisConnected');
+      };
+
+      websocket.onmessage = function(evt){
+        console.log('Got Message');
+        console.log(evt.data);
+        var msg = JSON.parse(evt.data);
+        if(msg.name == "areaA" && msg.food>0){
+          document.getElementById("buttonA").style = "background-color:red;";
+        }else if(msg.name == "areaB" && msg.food>0){
+          document.getElementById("buttonB").style = "background-color:red;";
+        }else if(msg.name == "areaC" && msg.food>0) {
+          document.getElementById("buttonC").style = "background-color:red;";
+        }else if(msg.name == "areaD" && msg.food>0) {
+          document.getElementById("buttonD").style = "background-color:red;";
+        }else if(msg.name == "areaE" && msg.food>0) {
+          document.getElementById("buttonE").style = "background-color:red;";
+        }else if(msg.name == "areaF" && msg.food>0) {
+          document.getElementById("buttonF").style = "background-color:red;";
+        }else if(msg.name == "areaG" && msg.food>0) {
+          document.getElementById("buttonG").style = "background-color:red;";
+        }else if(msg.name == "areaH" && msg.food>0) {
+          document.getElementById("buttonH").style = "background-color:red;";
+        }else if(msg.name == "areaA" && msg.food==0){
+          document.getElementById("buttonA").style = "background-color:green;";
+        }else if(msg.name == "areaB" && msg.food==0){
+          document.getElementById("buttonB").style = "background-color:green;";
+        }else if(msg.name == "areaC" && msg.food==0){
+          document.getElementById("buttonC").style = "background-color:green;";
+        }else if(msg.name == "areaD" && msg.food==0){
+          document.getElementById("buttonD").style = "background-color:green;";
+        }else if(msg.name == "areaE" && msg.food==0){
+          document.getElementById("buttonE").style = "background-color:green;";
+        }else if(msg.name == "areaF" && msg.food==0){
+          document.getElementById("buttonF").style = "background-color:green;";
+        }else if(msg.name == "areaG" && msg.food==0){
+          document.getElementById("buttonG").style = "background-color:green;";
+        }else if(msg.name == "areaH" && msg.food==0){
+          document.getElementById("buttonH").style = "background-color:green;";
+        }
+      };
+
+      websocket.onerror = function(evt){
+        console.log('Something\'s wrong');
+      };
+
+      $(function(){
+        $('#send').on('click',function(){
+          websocket.send($('#msg').val());
+          $('#msg').val('');
+        });
+      });
+
+    </script>
+  </head>
+  <body>
+    <div style="top:140px;left:990px;position:absolute;">
+      <form action="/areaA" method="get">
+        <input type="submit" value="" id="buttonA" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:200px;left:890px;position:absolute;">
+      <form action="/areaB" method="get">
+        <input type="submit" value="" id="buttonB" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:250px;left:1030px;position:absolute;">
+      <form action="/areaC" method="get">
+        <input type="submit" value="" id="buttonC" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:290px;left:860px;position:absolute;">
+      <form action="/areaD" method="get">
+        <input type="submit" value="" id="buttonD" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:240px;left:660px;position:absolute;">
+      <form action="/areaE" method="get">
+        <input type="submit" value="" id="buttonE" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:330px;left:630px;position:absolute;">
+      <form action="/areaF" method="get">
+        <input type="submit" value="" id="buttonF" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:360px;left:700px;position:absolute;">
+      <form action="/areaG" method="get">
+        <input type="submit" value="" id="buttonG" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:410px;left:570px;position:absolute;">
+      <form action="/areaH" method="get">
+        <input type="submit" value="" id="buttonH" style="background-color:green;"/>
+      </form>
+    </div>
+
+    <div style="top:561px;left:990px;position:absolute;">
+      <form action="/textview" method="get">
+        <input type="submit" value="總覽" style="background-color:green;width:100px;height:30px;"/>
+      </form>
+    </div>
+
+    <img src="./picture/8map_b1.jpg" alt="Mountain View" align=middle style="width: 100%; height: 100%">
+
+  </body>
+</html>
