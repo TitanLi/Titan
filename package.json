@@ -19,6 +19,8 @@
     "koa-websocket": "^2.1.0",
     "mongodb": "^2.2.15",
     "mqtt": "^2.1.3",
+    "node-mouse": "0.0.2",
+    "robotjs": "^0.4.5",
     "serialport": "^4.0.7",
     "underscore": "^1.8.3"
   }

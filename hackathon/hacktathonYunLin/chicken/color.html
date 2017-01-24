@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>color</title>
+
+	<script>
+		function sendcolor()
+		{
+    	var color = document.getElementById("color").value;
+    	var red = color[1]+color[2];
+    	var green = color[3]+color[4];
+    	var blue = color[5]+color[6];
+    	console.log(color);
+    	console.log(red);
+    	console.log(green);
+    	console.log(blue);
+    	alert("color" + color);
+    	document.getElementById('r').value= red;
+    	document.getElementById('g').value= green;
+    	document.getElementById('b').value= blue
+    	document.getElementById("getcolor").submit();
+    	//$.get("192.168.8.134", { r:red, g:green, b: blue });
+
+		}
+	</script>
+</head>
+<body>
+
+	<input type="color" value="#ff00ff"  id = "color">
+	<br>
+
+	<input type="button" value = "send" onclick = "sendcolor()">
+
+	<form method="GET" action = "http://192.168.8.143:8888" id = "getcolor">
+		<input type = "hidden" name = "R"  id  = "r" value = 0 >
+		<input type = "hidden" name = "G"  id = "g" value = 0 >
+		<input type = "hidden" name = "B"  id = "b" value = 0 >
+	</form>
+</body>
+<html>
