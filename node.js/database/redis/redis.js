@@ -20,9 +20,13 @@ client.get("apple",function(err,value){
   console.log(value);
 });
 
-client.del('message');
-client.del('key');
-client.del('name');
-client.del('apple');
+//Deletes all the keys of the currently selected DB
+// client.del('message');
+// client.del('key');
+// client.del('name');
+// client.del('apple');
+client.flushdb( function (err, didSucceed) {
+        console.log(didSucceed); // OK
+    });
 
 client.quit();

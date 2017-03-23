@@ -34,11 +34,15 @@ client.hgetall("apple1", function (err, obj) {
     console.dir(obj);
 });
 
-client.hdel("apple1","hashtest 1",redis.print);
-client.hdel("apple1","hashtest 6",redis.print);
-client.hdel("apple1","apple1",redis.print);
-client.hdel("apple1","apple2",redis.print);
-client.hdel("apple1","apple3",redis.print);
-client.hdel("apple1","apple4",redis.print);
+//Deletes all the keys of the currently selected DB
+// client.hdel("apple1","hashtest 1",redis.print);
+// client.hdel("apple1","hashtest 6",redis.print);
+// client.hdel("apple1","apple1",redis.print);
+// client.hdel("apple1","apple2",redis.print);
+// client.hdel("apple1","apple3",redis.print);
+// client.hdel("apple1","apple4",redis.print);
+client.flushdb( function (err, didSucceed) {
+        console.log(didSucceed); // OK
+    });
 
 client.quit();
