@@ -5,7 +5,7 @@
 * 國立臺中科技大學 資訊工程系
 
 ## 致力研究
-**Node.js、Arduino、MongoDB、MQTT、Redis、Koa、IOT相關技術**
+**Node.js、Koa、MQTT、Redis、MongoDB、Arduino、IOT相關技術**
 
 ## 參賽經驗
 1. 2016智慧城市黑客松
