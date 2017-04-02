@@ -48,17 +48,3 @@ $ snmpwalk -v 2c -c public localhost .1.3.6.1.4.1.2021.4.3.0
 ```
 $ sudo netstat -antup | grep 161
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
