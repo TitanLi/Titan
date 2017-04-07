@@ -10,14 +10,20 @@ class MessageBoard extends Component{     //新增元件
     }
   }
 
+  handleItem(inputMessage){
+    let currentMessage=this.state.item;
+    currentMessage.push(inputMessage);
+    this.setState({
+      item:currentMessage,
+    });
+  }
+
   render(){                               //render( ){ } 內為顯示的內容
     return(                               //return 回傳內容至render( )
       <div>
         messageBoard!!!!
-        <MessageForm />
-        <MessageList
-          item = {this.state.item}
-        />
+        <MessageList item = {this.state.item}/>
+        <MessageForm handleItem={this.handleItem.bind(this)}/>
       </div>
     );
   }
