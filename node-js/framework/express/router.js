@@ -1,7 +1,15 @@
 var express = require('express');
 var url = require('url');
-var bodyParse = require('body-parser');
+var bodyParse = require('body-parser');        //post使用
 var app = express();
+
+var userAPI = express.Router();                //使用Router管理路由
+
+userAPI.get('/signout',function(req,res){
+  res.send('Sign out');
+});
+
+app.use('/apis/user',userAPI);
 
 //post
 app.use(bodyParse.urlencoded({extended:false}));
@@ -25,6 +33,7 @@ app.get('/name',function(req,res){
 
 app.post('/post',function(req,res){
   console.log(req.body.apple);
+  res.send(JSON.stringify(req.body));
   res.end();
 });
 
