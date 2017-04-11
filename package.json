@@ -11,6 +11,7 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "child_process": "^1.0.2",
+    "co-views": "^2.1.0",
     "cookie-session": "^2.0.0-beta.1",
     "crypto": "0.0.3",
     "dateformat": "^2.0.0",
@@ -18,8 +19,10 @@
     "express": "^4.15.2",
     "filewalker": "^0.1.3",
     "fs-extra": "^2.1.2",
+    "jade": "^1.11.0",
     "koa": "^1.2.4",
     "koa-bodyparser": "^2.3.0",
+    "koa-route": "^3.2.0",
     "koa-router": "^5.4.0",
     "koa-static": "^2.0.0",
     "koa-views": "^4.1.0",
