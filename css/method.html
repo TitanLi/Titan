@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      .classA table {color:yellow;}                 /*套用到class="classA"內部的table標記*/
+      table .classA a {color:blue;}                 /*套用到table內具有class="classA"類別裡的超連結a標記上*/
+      .classB , .classC {background-color:purple;}  /*套用到class="classB"或class="classC"的標記*/
+    </style>
+  </head>
+  <body>
+    <div class="classA">
+      <table>
+        <tr>
+          <th>A</th>
+          <th>B</th>
+          <th>C</th>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>2</td>
+          <td>apple</td>
+        </tr>
+      </table>
+    </div>
+
+    <table>
+      <tr>
+        <th>A</th>
+        <th>B</th>
+        <th>C</th>
+      </tr>
+      <tr class="classA">
+        <th>1</th>
+        <td><a href="http://www.google.com">google</a></td>
+        <td>apple</td>
+      </tr>
+    </table>
+
+    <div class="classB">
+      <h2>classB</h2>
+    </div>
+
+    <div class="classC">
+      <h3>classC</h3>
+    </div>
+  </body>
+</html>
