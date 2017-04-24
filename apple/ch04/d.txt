@@ -1,0 +1,14 @@
+  1  package com.ch04;
+  2  
+  3  import java.io.FileOutputStream;
+  4  import java.io.IOException;
+  5  
+  6  public class SimpleFileOutput {
+  7  	public static void main(String[] args) throws IOException {
+  8  		FileOutputStream out = new FileOutputStream("data.txt");
+  9  		out.write(65);
+ 10  		out.flush();
+ 11  		out.close();
+ 12  	}
+ 13  
+ 14  }

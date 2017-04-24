@@ -1,0 +1,19 @@
+  1  package com.ch04;
+  2  
+  3  import java.io.BufferedReader;
+  4  import java.io.FileInputStream;
+  5  import java.io.IOException;
+  6  import java.io.InputStreamReader;
+  7  
+  8  public class SimpleFile47 {
+  9  	public static void main(String[] args) throws IOException {
+ 10  		FileInputStream fis = new FileInputStream("data.txt");
+ 11  		InputStreamReader isr = new InputStreamReader(fis);
+ 12  		BufferedReader in = new BufferedReader(isr);
+ 13  		String line = in.readLine();
+ 14  		while(line!=null){
+ 15  			System.out.println(line);
+ 16  			line = in.readLine();
+ 17  		}
+ 18  	}
+ 19  }
