@@ -17,11 +17,11 @@
       }
     </script>
   </head>
-  <body onload=JavaScript:hide('popup1');hide('popup2');>
+  <body onload=JavaScript:hide('popup1');hide('popup2');> <!--讓浮現功能表在一開始就處於隱藏狀態-->
     <ul onmouseover="show('popup1');" onmouseout="show('popup2');" style="position:absolute; left:100px; top:20px">
       <li id="menu1" class="menu">menu1</li>
       <ul id="popup1" class="menu">
-        <li><a href="JavaScript:alert('1.1');">menu 1.1</a></li>
+        <li><a href="JavaScript:alert('1.1');">menu 1.1</a></li>  <!--使用javascript語法，點雪此連結時，就會有警告視窗顯示1.1的訊息-->
         <li><a href="JavaScript:alert('1.2');">menu 1.2</a></li>
       </ul>
     </ul>
