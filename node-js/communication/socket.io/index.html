@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>socket.io</title>
+    <meta charSet='utf-8'>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <p>Hello World</p>
+    <script>
+      var socket = io.connect('http://127.0.0.1:3000');   // 連線至伺服器
+      socket.on('event',function(data){
+        $('#date').text(data.date)
+      });
+
+      function data(){
+        socket.emit('client_data', {
+          'data': 'apple'
+        });
+      }
+    </script>
+    <div id="date"></div>
+    <input type="button" value="emit" onclick="javascript:data()"
+  </body>
+</html>
