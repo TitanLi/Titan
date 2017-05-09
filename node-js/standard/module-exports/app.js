@@ -1,0 +1,11 @@
+var Data = require('./lib/introduction.js');
+var array = require('./lib/array.js');
+var method = require('./lib/method.js');
+var object = require('./lib/object.js');
+var data = new Data('Titan',20);
+data.about();
+console.log(array[5]);
+method.name();
+object.name();
+object.age();
+object.believe();
