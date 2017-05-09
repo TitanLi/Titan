@@ -5,7 +5,7 @@ var bodyParser = require('koa-bodyparser');
 var app = koa();
 var router = new Router();
 
-app.use(bodyParser());
+app.use(bodyParser());                //koa會自動解析body
 
 router.post('/',function * (){
   console.log(this.request.body);
