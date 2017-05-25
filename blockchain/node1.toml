@@ -13,5 +13,5 @@ port = 8081
 [account]
 password = ["node.pwds"]
 [mining]
-engine_signer = "0x00BBb8B6a05f1d72354158B1a18bc8A048beC187"
+engine_signer = "0x00D7f577910F69576968Aa364b706Ec69e7482C3"
 reseal_on_txs = "none"

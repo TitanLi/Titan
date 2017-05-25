@@ -6,7 +6,10 @@
                 "gasLimitBoundDivisor": "0x400",
                 "stepDuration": "5",
                 "validators" : {
-                    "list": []
+                    "list": [
+                      "0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e",
+                      "0x00D7f577910F69576968Aa364b706Ec69e7482C3"
+                    ]
                 }
             }
         }
@@ -31,12 +34,6 @@
         "0x0000000000000000000000000000000000000002": { "balance": "1", "builtin": { "name": "sha256", "pricing": { "linear": { "base": 60, "word": 12 } } } },
         "0x0000000000000000000000000000000000000003": { "balance": "1", "builtin": { "name": "ripemd160", "pricing": { "linear": { "base": 600, "word": 120 } } } },
         "0x0000000000000000000000000000000000000004": { "balance": "1", "builtin": { "name": "identity", "pricing": { "linear": { "base": 15, "word": 3 } } } },
-        "0x00D3538cfB4604CFE1166A9fBEb33BbD8cb22924": { "balance": "10000000000000000000000" }
-    },
-    "validators" : {
-    "list": [
-        "0x007e80E906F5561f5E5483726F7eC15C7e0CcA31",
-        "0x00BBb8B6a05f1d72354158B1a18bc8A048beC187"
-      ]
+        "0x00B6cf2f339A99aC1c3a59EFD986c95D95b4e83d": { "balance": "10000000000000000000000" }
     }
 }
