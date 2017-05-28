@@ -53,32 +53,29 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="/staff/information">全體員工資訊 <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="/staff/admin">管理 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/staff/information">全體員工資訊</a></li>
             <li><a href="/staff/pay">全體員工薪水</a></li>
             <li><a href="/staff/list">全體員工工作明細</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="sub-header">Section title</h1>
+          <h1 class="sub-header">{{subject}}</h1>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>{{ title.t1 }}</th>
-                  <th>{{ title.t2 }}</th>
-                  <th>{{ title.t3 }}</th>
-                  <th>{{ title.t4 }}</th>
-                  <th>{{ title.t5 }}</th>
+                  {% for titleItem in title %}
+                    <th>{{ titleItem }}</th>
+                  {% endfor %}
                 </tr>
               </thead>
               <tbody>
                 {% for a in apple %}
                 <tr>
-                  <td>{{ a.id }}</td>
-                  <td>{{ a.name }}</td>
-                  <td>{{ a.sex }}</td>
-                  <td>{{ a.old }}</td>
-                  <td>{{ a.birthday }}</td>
+                  {% for item in a%}
+                    <td>{{ item }}</td>
+                  {% endfor %}
                 </tr>
                 {% endfor %}
               </tbody>
