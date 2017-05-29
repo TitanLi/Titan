@@ -125,9 +125,8 @@ function * adminInformation(){
   var dataArray = [];
   for(let i=0;i<data.length;i++){
     dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "sex" : data[i].sex, "old" : data[i].old, "birthday" : data[i].birthday};
-    count = i;
+    count = data[i].id+1;
   }
-  count = count + 2;
   this.body = yield render('administer',{subject:"information",
                                         title:{"t1":"id","t2":"name","t3":"sex","t4":"old","t5":"birthday","t6":"動作"},
                                         apple:dataArray,
@@ -142,9 +141,8 @@ function * adminPay(){
   var dataArray = [];
   for(let i=0;i<data.length;i++){
     dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "month" : data[i].month, "money" : data[i].money};
-    count = i;
+    count = data[i].id+1;
   }
-  count = count + 2;
   this.body = yield render('administer',{subject:"pay",
                                          title:{"t1":"id","t2":"name","t3":"month","t4":"money","t5":"動作"},
                                          apple:dataArray,
@@ -159,9 +157,8 @@ function * adminList(){
   var dataArray = [];
   for(let i=0;i<data.length;i++){
     dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "project" : data[i].project, "date" : data[i].date, "hours" : data[i].hours};
-    count = i;
+    count = data[i].id+1;
   }
-  count = count + 2;
   this.body = yield render('administer',{subject:"list",
                                          title:{"t1":"id","t2":"name","t3":"project","t4":"date","t5":"hours","t6":"動作"},
                                          apple:dataArray});

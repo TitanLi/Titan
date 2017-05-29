@@ -54,7 +54,7 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="sub-header">{{subject}}</h1>
           <div class="table-responsive">
-            <form action={{ router }} method="post" id="myForm">
+            <form action={{ router }} method="post" id="myForm" name="myForm" onsubmit="return checkFunction()">
               <table class="table table-striped" id="myTable">
                 <thead>
                   <tr>
@@ -122,8 +122,12 @@
         document.getElementById("submit").value = "刪除";
       }
 
-      function routerFunction(){
-        return router;
+      function checkFunction(){
+        if(document.myForm.name.value=="" || document.myForm.sex.value=="" || document.myForm.old.value=="" || document.myForm.birthday.value=="" || document.myForm.textId.value==""){
+          alert("所有欄位都必須填寫");
+          return false;
+        }
+        return true;
       }
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
