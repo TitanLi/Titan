@@ -36,9 +36,11 @@ app.use(route.get('/administer/list',adminList));
 app.use(route.post('/customer',customerData));
 app.use(route.post('/admin',adminData));
 app.use(route.post('/insert/information',insertInformation));
-app.use(route.post('/uptade/information',updateInformation));
+app.use(route.post('/update/information',updateInformation));
 app.use(route.post('/delete/information',deleteInformation));
+app.use(route.post('/insert/pay',insertPay));
 app.use(route.post('/update/pay',updatePay));
+app.use(route.post('/delete/pay',deletePay));
 
 function * index(){
   this.body = yield render('index');
@@ -121,14 +123,15 @@ function * administer(){
 
 function * adminInformation(){
   var collection = db.collection('information');                           //選擇collection為information
-  var data = yield collection.find().toArray();
+  var data = yield collection.find().sort({id: 1}).toArray();
   var dataArray = [];
+  count = 1;
   for(let i=0;i<data.length;i++){
-    dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "sex" : data[i].sex, "old" : data[i].old, "birthday" : data[i].birthday};
+    dataArray[i] = {"td" : i+1,"id" : data[i].id, "name" : data[i].name, "sex" : data[i].sex, "old" : data[i].old, "birthday" : data[i].birthday};
     count = data[i].id+1;
   }
   this.body = yield render('administer',{subject:"information",
-                                        title:{"t1":"id","t2":"name","t3":"sex","t4":"old","t5":"birthday","t6":"動作"},
+                                        title:{"t1":"數量","t2":"id","t3":"name","t4":"sex","t5":"old","t6":"birthday","t7":"動作"},
                                         apple:dataArray,
                                         countId:count,
                                         router:"/insert/information",
@@ -137,24 +140,26 @@ function * adminInformation(){
 
 function * adminPay(){
   var collection = db.collection('pay');                           //選擇collection為pay
-  var data = yield collection.find().toArray();
+  var data = yield collection.find().sort({id: 1}).toArray();
   var dataArray = [];
+  count = 1;
   for(let i=0;i<data.length;i++){
-    dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "month" : data[i].month, "money" : data[i].money};
+    dataArray[i] = {"td" : i+1,"id" : data[i].id, "name" : data[i].name, "month" : data[i].month, "money" : data[i].money};
     count = data[i].id+1;
   }
   this.body = yield render('administer',{subject:"pay",
-                                         title:{"t1":"id","t2":"name","t3":"month","t4":"money","t5":"動作"},
+                                         title:{"t1":"數量","t2":"id","t3":"name","t4":"month","t5":"money","t6":"動作"},
                                          apple:dataArray,
                                          countId:count,
-                                         router:"/update/pay",
-                                         value:"更新"});
+                                         router:"/insert/pay",
+                                         value:"新增"});
 }
 
 function * adminList(){
   var collection = db.collection('list');                           //選擇collection為list
   var data = yield collection.find().toArray();
   var dataArray = [];
+  count = 1;
   for(let i=0;i<data.length;i++){
     dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "project" : data[i].project, "date" : data[i].date, "hours" : data[i].hours};
     count = data[i].id+1;
@@ -191,6 +196,14 @@ function * deleteInformation(){
   this.redirect('/administer/information');
 }
 
+function * insertPay(){
+  var data = yield parse(this);
+  var insertData = {"id" : parseInt(data.id), "name" : data.name, "month" : data.month, "money" : data.money};
+  var collection = db.collection('pay');
+  var data = yield collection.insert(insertData);
+  this.redirect('/administer/pay');
+}
+
 function * updatePay(){
   var data = yield parse(this);
   console.log(data);
@@ -199,6 +212,14 @@ function * updatePay(){
   var data = yield collection.update(findData,{
                                       '$set':{"id" : parseInt(data.id), "name" : data.name, "month" : data.month, "money" : data.money}
                                     });
+  this.redirect('/administer/pay');
+}
+
+function * deletePay(){
+  var data = yield parse(this);
+  console.log(data);
+  var collection = db.collection('pay');
+  var data = yield collection.remove({"id" : parseInt(data.id), "name" : data.name, "month" : data.month, "money" : data.money});
   this.redirect('/administer/pay');
 }
 

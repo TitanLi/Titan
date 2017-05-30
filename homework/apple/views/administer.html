@@ -14,8 +14,7 @@
     <script src="/assets/js/ie-emulation-modes-warning.js"></script>
   </head>
 
-  <body>
-
+  <body onload="insertText();">
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -52,7 +51,7 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="sub-header">{{subject}}</h1>
+          <h1 class="sub-header" id="title">{{subject}}</h1>
           <div class="table-responsive">
             <form action={{ router }} method="post" id="myForm" name="myForm" onsubmit="return checkFunction()">
               <table class="table table-striped" id="myTable">
@@ -67,10 +66,10 @@
                   {% for a in apple %}
                   <tr>
                     {% for item in a%}
-                      <td id={{ a.id }} >{{ item }}</td>
+                      <td>{{ item }}</td>
                     {% endfor %}
-                    <td><input type="button" value="更新" onclick="updateFunction('{{a.id}}')"></td>
-                    <td><input type="button" value="刪除" onclick="deleteFunction('{{a.id}}')"></td>
+                    <td><input type="button" value="更新" onclick="updateFunction('{{a.td}}')"></td>
+                    <td><input type="button" value="刪除" onclick="deleteFunction('{{a.td}}')"></td>
                   </tr>
                   {% endfor %}
                   <tr>
@@ -79,11 +78,14 @@
                         {% if router == "/insert/information" %}
                           <td id="tdId">{{ countId }}</td>
                         {% endif %}
-                        {% if router == "/update/pay" %}
-                          <td><input type=text name={{ countId }}></td>
+                        {% if router == "/insert/pay" %}
+                          <td id="tdId"><input type=text name={{ count }} id={{ count }}></td>
                         {% endif %}
                       {% endif %}
-                      {% if count != "id" && count!="動作"%}
+                      {% if count == "數量" %}
+                        <td id="td"></td>
+                      {% endif %}
+                      {% if count != "數量" && count != "id" && count!="動作"%}
                         <td><input type=text name={{count}} id={{count}} value=""></td>
                       {% endif %}
                     {% endfor %}
@@ -100,26 +102,47 @@
     </div>
 
     <script type="text/javascript">
+      // document.getElementById("tId").text = document.getElementById("myTable").rows.length;
       function updateFunction(a) {
-        document.getElementById("tdId").innerHTML = "<input type='text' name='id' id='textId'></input>";
-        document.getElementById("name").value = document.getElementById("myTable").rows[a].cells[1].firstChild.data;
-        document.getElementById("sex").value = document.getElementById("myTable").rows[a].cells[2].firstChild.data;
-        document.getElementById("old").value = document.getElementById("myTable").rows[a].cells[3].firstChild.data;
-        document.getElementById("birthday").value = document.getElementById("myTable").rows[a].cells[4].firstChild.data;
-        document.getElementById("textId").value = document.getElementById("myTable").rows[a].cells[0].firstChild.data;
-        document.getElementById("myForm").action = "/uptade/information";
-        document.getElementById("submit").value = "修改";
+        if($('.sub-header').text() == "information"){
+          document.getElementById("tdId").innerHTML = "<input type='text' name='id' id='textId'></input>";
+          document.getElementById("textId").value = document.getElementById("myTable").rows[a].cells[1].firstChild.data;
+          document.getElementById("name").value = document.getElementById("myTable").rows[a].cells[2].firstChild.data;
+          document.getElementById("sex").value = document.getElementById("myTable").rows[a].cells[3].firstChild.data;
+          document.getElementById("old").value = document.getElementById("myTable").rows[a].cells[4].firstChild.data;
+          document.getElementById("birthday").value = document.getElementById("myTable").rows[a].cells[5].firstChild.data;
+          document.getElementById("myForm").action = "/update/information";
+          document.getElementById("submit").value = "修改";
+        }
+        if($('.sub-header').text() == "pay"){
+          document.getElementById("id").value = document.getElementById("myTable").rows[a].cells[1].firstChild.data;
+          document.getElementById("name").value = document.getElementById("myTable").rows[a].cells[2].firstChild.data;
+          document.getElementById("month").value = document.getElementById("myTable").rows[a].cells[3].firstChild.data;
+          document.getElementById("money").value = document.getElementById("myTable").rows[a].cells[4].firstChild.data;
+          document.getElementById("myForm").action = "/update/pay";
+          document.getElementById("submit").value = "修改";
+        }
       }
 
       function deleteFunction(a) {
-        document.getElementById("tdId").innerHTML = "<input type='text' name='id' id='textId'></input>";
-        document.getElementById("name").value = document.getElementById("myTable").rows[a].cells[1].firstChild.data;
-        document.getElementById("sex").value = document.getElementById("myTable").rows[a].cells[2].firstChild.data;
-        document.getElementById("old").value = document.getElementById("myTable").rows[a].cells[3].firstChild.data;
-        document.getElementById("birthday").value = document.getElementById("myTable").rows[a].cells[4].firstChild.data;
-        document.getElementById("textId").value = document.getElementById("myTable").rows[a].cells[0].firstChild.data;
-        document.getElementById("myForm").action = "/delete/information";
-        document.getElementById("submit").value = "刪除";
+        if($('.sub-header').text() == "information"){
+          document.getElementById("tdId").innerHTML = "<input type='text' name='id' id='textId'></input>";
+          document.getElementById("textId").value = document.getElementById("myTable").rows[a].cells[1].firstChild.data;
+          document.getElementById("name").value = document.getElementById("myTable").rows[a].cells[2].firstChild.data;
+          document.getElementById("sex").value = document.getElementById("myTable").rows[a].cells[3].firstChild.data;
+          document.getElementById("old").value = document.getElementById("myTable").rows[a].cells[4].firstChild.data;
+          document.getElementById("birthday").value = document.getElementById("myTable").rows[a].cells[5].firstChild.data;
+          document.getElementById("myForm").action = "/delete/information";
+          document.getElementById("submit").value = "刪除";
+        }
+        if($('.sub-header').text() == "pay"){
+          document.getElementById("id").value = document.getElementById("myTable").rows[a].cells[1].firstChild.data;
+          document.getElementById("name").value = document.getElementById("myTable").rows[a].cells[2].firstChild.data;
+          document.getElementById("month").value = document.getElementById("myTable").rows[a].cells[3].firstChild.data;
+          document.getElementById("money").value = document.getElementById("myTable").rows[a].cells[4].firstChild.data;
+          document.getElementById("myForm").action = "/delete/pay";
+          document.getElementById("submit").value = "刪除";
+        }
       }
 
       function checkFunction(){
@@ -128,6 +151,10 @@
           return false;
         }
         return true;
+      }
+
+      function insertText () {
+        document.getElementById('td').innerHTML = document.getElementById("myTable").rows.length - 1;
       }
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
