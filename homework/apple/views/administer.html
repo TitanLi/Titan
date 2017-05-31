@@ -78,7 +78,7 @@
                         {% if router == "/insert/information" %}
                           <td id="tdId">{{ countId }}</td>
                         {% endif %}
-                        {% if router == "/insert/pay" %}
+                        {% if router == "/insert/pay" || router == "/insert/list"%}
                           <td id="tdId"><input type=text name={{ count }} id={{ count }}></td>
                         {% endif %}
                       {% endif %}
@@ -122,6 +122,15 @@
           document.getElementById("myForm").action = "/update/pay";
           document.getElementById("submit").value = "修改";
         }
+        if($('.sub-header').text() == "list"){
+          document.getElementById("id").value = document.getElementById("myTable").rows[a].cells[1].firstChild.data;
+          document.getElementById("name").value = document.getElementById("myTable").rows[a].cells[2].firstChild.data;
+          document.getElementById("project").value = document.getElementById("myTable").rows[a].cells[3].firstChild.data;
+          document.getElementById("date").value = document.getElementById("myTable").rows[a].cells[4].firstChild.data;
+          document.getElementById("hours").value = document.getElementById("myTable").rows[a].cells[5].firstChild.data;
+          document.getElementById("myForm").action = "/update/list";
+          document.getElementById("submit").value = "修改";
+        }
       }
 
       function deleteFunction(a) {
@@ -141,6 +150,15 @@
           document.getElementById("month").value = document.getElementById("myTable").rows[a].cells[3].firstChild.data;
           document.getElementById("money").value = document.getElementById("myTable").rows[a].cells[4].firstChild.data;
           document.getElementById("myForm").action = "/delete/pay";
+          document.getElementById("submit").value = "刪除";
+        }
+        if($('.sub-header').text() == "list"){
+          document.getElementById("id").value = document.getElementById("myTable").rows[a].cells[1].firstChild.data;
+          document.getElementById("name").value = document.getElementById("myTable").rows[a].cells[2].firstChild.data;
+          document.getElementById("project").value = document.getElementById("myTable").rows[a].cells[3].firstChild.data;
+          document.getElementById("date").value = document.getElementById("myTable").rows[a].cells[4].firstChild.data;
+          document.getElementById("hours").value = document.getElementById("myTable").rows[a].cells[5].firstChild.data;
+          document.getElementById("myForm").action = "/delete/list";
           document.getElementById("submit").value = "刪除";
         }
       }

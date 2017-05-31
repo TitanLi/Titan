@@ -41,6 +41,10 @@ app.use(route.post('/delete/information',deleteInformation));
 app.use(route.post('/insert/pay',insertPay));
 app.use(route.post('/update/pay',updatePay));
 app.use(route.post('/delete/pay',deletePay));
+app.use(route.post('/insert/list',insertList));
+app.use(route.post('/update/list',updateList));
+app.use(route.post('/delete/list',deleteList));
+
 
 function * index(){
   this.body = yield render('index');
@@ -161,12 +165,15 @@ function * adminList(){
   var dataArray = [];
   count = 1;
   for(let i=0;i<data.length;i++){
-    dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "project" : data[i].project, "date" : data[i].date, "hours" : data[i].hours};
+    dataArray[i] = {"td" : i+1,"id" : data[i].id, "name" : data[i].name, "project" : data[i].project, "date" : data[i].date, "hours" : data[i].hours};
     count = data[i].id+1;
   }
   this.body = yield render('administer',{subject:"list",
-                                         title:{"t1":"id","t2":"name","t3":"project","t4":"date","t5":"hours","t6":"動作"},
-                                         apple:dataArray});
+                                         title:{"t1":"數量","t2":"id","t3":"name","t4":"project","t5":"date","t6":"hours","t7":"動作"},
+                                         apple:dataArray,
+                                         countId:count,
+                                         router:"/insert/list",
+                                         value:"新增"});
 }
 
 function * insertInformation(){
@@ -221,6 +228,33 @@ function * deletePay(){
   var collection = db.collection('pay');
   var data = yield collection.remove({"id" : parseInt(data.id), "name" : data.name, "month" : data.month, "money" : data.money});
   this.redirect('/administer/pay');
+}
+
+function * insertList(){
+  var data = yield parse(this);
+  var insertData = {"id" : parseInt(data.id), "name" : data.name, "project" : data.project, "date" : data.date, "hours" : data.hours};
+  var collection = db.collection('list');
+  var data = yield collection.insert(insertData);
+  this.redirect('/administer/list');
+}
+
+function * updateList(){
+  var data = yield parse(this);
+  console.log(data);
+  var findData = {"id" : parseInt(data.id)};
+  var collection = db.collection('list');
+  var data = yield collection.update(findData,{
+                                      '$set':{"id" : parseInt(data.id), "name" : data.name, "project" : data.project, "date" : data.date, "hours" : data.hours}
+                                    });
+  this.redirect('/administer/list');
+}
+
+function * deleteList(){
+  var data = yield parse(this);
+  console.log(data);
+  var collection = db.collection('list');
+  var data = yield collection.remove({"id" : parseInt(data.id), "name" : data.name, "project" : data.project, "date" : data.date, "hours" : data.hours});
+  this.redirect('/administer/list');
 }
 
 app.listen(3000);
