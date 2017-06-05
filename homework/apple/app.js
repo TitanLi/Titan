@@ -23,17 +23,34 @@ app.use(serve('./views'));
 
 app.use(route.get('/',index));
 app.use(route.get('/customer',customer));
+app.use(route.get('/customer/information',customerInformation));
+app.use(route.get('/customer/admin',customerAdmin));
+app.use(route.get('/customer/administer',customerAdminister));
+app.use(route.get('/customer/administer/list',customerAdministerList));
 app.use(route.get('/project',project));
+app.use(route.get('/project/information',projectInformation));
+app.use(route.get('/project/admin',projectAdmin));
+app.use(route.get('/project/administer',projectAdminister));
+app.use(route.get('/project/administer/list',projectAdministerList));
 app.use(route.get('/staff',staff));
-app.use(route.get('/staff/admin',admin));
+app.use(route.get('/staff/admin',staffAdmin));
 app.use(route.get('/staff/information',information));
 app.use(route.get('/staff/pay',pay));
 app.use(route.get('/staff/list',list));
-app.use(route.get('/administer',administer));
+app.use(route.get('/administer',staffAdminister));
 app.use(route.get('/administer/information',adminInformation));
 app.use(route.get('/administer/pay',adminPay));
 app.use(route.get('/administer/list',adminList));
-app.use(route.post('/customer',customerData));
+app.use(route.post('/customer',customerSearch));
+app.use(route.post('/customer/admin',customerAdminData));
+app.use(route.post('/insert/customer',insertCustomer));
+app.use(route.post('/update/customer',updateCustomer));
+app.use(route.post('/delete/customer',deleteCustomer));
+app.use(route.post('/project',projectSearch));
+app.use(route.post('/project/admin',projectAdminData));
+app.use(route.post('/insert/project',insertProject));
+app.use(route.post('/update/project',updateProject));
+app.use(route.post('/delete/project',deleteProject));
 app.use(route.post('/admin',adminData));
 app.use(route.post('/insert/information',insertInformation));
 app.use(route.post('/update/information',updateInformation));
@@ -54,14 +71,184 @@ function * customer(){
   this.body = yield render('customer');
 }
 
-function * customerData(date){
+function * customerInformation(){
+  var collection = db.collection('information');                           //選擇collection為information
+  var data = yield collection.find().toArray();
+  var dataArray = [];
+  for(let i=0;i<data.length;i++){
+    dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "sex" : data[i].sex, "old" : data[i].old, "birthday" : data[i].birthday};
+  }
+  this.body = yield render('customer',{subject:"information",
+                                      title:{"t1":"id","t2":"name","t3":"sex","t4":"old","t5":"birthday"},
+                                      apple:dataArray});
+}
+
+function * customerAdmin(){
+  this.body = yield render('customerAdmin');
+}
+
+function * customerAdminData(){
+  var data = yield parse(this);
+  if(data.account == 'root' && data.password == 'apple'){
+    message='';
+    this.redirect('/customer/administer');
+  }else{
+    this.redirect('/customer/admin');
+  }
+}
+
+function * customerAdminister(){
+  this.body = yield render('customerAdminister');
+}
+
+function * customerAdministerList(){
+  var collection = db.collection('information');                           //選擇collection為information
+  var data = yield collection.find().sort({id: 1}).toArray();
+  var dataArray = [];
+  count = 1;
+  for(let i=0;i<data.length;i++){
+    dataArray[i] = {"td" : i+1,"id" : data[i].id, "name" : data[i].name, "sex" : data[i].sex, "old" : data[i].old, "birthday" : data[i].birthday};
+    count = data[i].id+1;
+  }
+  this.body = yield render('customerAdminister',{subject:"information",
+                                        title:{"t1":"數量","t2":"id","t3":"name","t4":"sex","t5":"old","t6":"birthday","t7":"動作"},
+                                        apple:dataArray,
+                                        countId:count,
+                                        router:"/insert/customer",
+                                        value:"新增"});
+}
+
+function * customerSearch(date){
+  var data1 = yield parse(this);
+  console.log(data1);
+  var collection = db.collection('information');                           //選擇collection為information
+  var data = yield collection.find({"name":data1.search}).toArray();
+  var dataArray = [];
+  for(let i=0;i<data.length;i++){
+    dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "sex" : data[i].sex, "old" : data[i].old, "birthday" : data[i].birthday};
+  }
+  this.body = yield render('customer',{subject:"information",
+                                    title:{"t1":"數量","t2":"id","t3":"name","t4":"sex","t5":"old","t6":"birthday","t7":"動作"},
+                                    apple:dataArray});
+}
+
+function * insertCustomer(){
+  var data = yield parse(this);
+  var insertData = {"id" : count, "name" : data.name, "sex" : data.sex, "old" : data.old, "birthday" : data.birthday};
+  var collection = db.collection('information');
+  var data = yield collection.insert(insertData);
+  this.redirect('/customer/administer/list');
+}
+
+function * updateCustomer(){
   var data = yield parse(this);
   console.log(data);
-  this.redirect('/customer');
+  var findData = {"id" : parseInt(data.id)};
+  var collection = db.collection('information');
+  var data = yield collection.update(findData,{
+                                      '$set':{"id" : parseInt(data.id), "name" : data.name, "sex" : data.sex, "old" : data.old, "birthday" : data.birthday}
+                                    });
+  this.redirect('/customer/administer/list');
+}
+
+function * deleteCustomer(){
+  var data = yield parse(this);
+  console.log(data);
+  var collection = db.collection('information');
+  var data = yield collection.remove({"id" : parseInt(data.id), "name" : data.name, "sex" : data.sex, "old" : data.old, "birthday" : data.birthday});
+  this.redirect('/customer/administer/list');
 }
 
 function * project(){
   this.body = yield render('project');
+}
+
+function * projectInformation(){
+  var collection = db.collection('information');                           //選擇collection為information
+  var data = yield collection.find().toArray();
+  var dataArray = [];
+  for(let i=0;i<data.length;i++){
+    dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "sex" : data[i].sex, "old" : data[i].old, "birthday" : data[i].birthday};
+  }
+  this.body = yield render('project',{subject:"information",
+                                    title:{"t1":"id","t2":"name","t3":"sex","t4":"old","t5":"birthday"},
+                                    apple:dataArray});
+}
+
+function * projectAdmin(){
+  this.body = yield render('projectAdmin');
+}
+
+function * projectAdminData(){
+  var data = yield parse(this);
+  if(data.account == 'root' && data.password == 'apple'){
+    message='';
+    this.redirect('/project/administer');
+  }else{
+    this.redirect('/project/admin');
+  }
+}
+
+function * projectAdminister(){
+  this.body = yield render('projectAdminister');
+}
+
+function * projectAdministerList(){
+  var collection = db.collection('information');                           //選擇collection為information
+  var data = yield collection.find().sort({id: 1}).toArray();
+  var dataArray = [];
+  count = 1;
+  for(let i=0;i<data.length;i++){
+    dataArray[i] = {"td" : i+1,"id" : data[i].id, "name" : data[i].name, "sex" : data[i].sex, "old" : data[i].old, "birthday" : data[i].birthday};
+    count = data[i].id+1;
+  }
+  this.body = yield render('projectAdminister',{subject:"information",
+                                        title:{"t1":"數量","t2":"id","t3":"name","t4":"sex","t5":"old","t6":"birthday","t7":"動作"},
+                                        apple:dataArray,
+                                        countId:count,
+                                        router:"/insert/project",
+                                        value:"新增"});
+}
+
+function * projectSearch(date){
+  var data1 = yield parse(this);
+  console.log(data1);
+  var collection = db.collection('information');                           //選擇collection為information
+  var data = yield collection.find({"name":data1.search}).toArray();
+  var dataArray = [];
+  for(let i=0;i<data.length;i++){
+    dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "sex" : data[i].sex, "old" : data[i].old, "birthday" : data[i].birthday};
+  }
+  this.body = yield render('project',{subject:"information",
+                                    title:{"t1":"數量","t2":"id","t3":"name","t4":"sex","t5":"old","t6":"birthday","t7":"動作"},
+                                    apple:dataArray});
+}
+
+function * insertProject(){
+  var data = yield parse(this);
+  var insertData = {"id" : count, "name" : data.name, "sex" : data.sex, "old" : data.old, "birthday" : data.birthday};
+  var collection = db.collection('information');
+  var data = yield collection.insert(insertData);
+  this.redirect('/project/administer/list');
+}
+
+function * updateProject(){
+  var data = yield parse(this);
+  console.log(data);
+  var findData = {"id" : parseInt(data.id)};
+  var collection = db.collection('information');
+  var data = yield collection.update(findData,{
+                                      '$set':{"id" : parseInt(data.id), "name" : data.name, "sex" : data.sex, "old" : data.old, "birthday" : data.birthday}
+                                    });
+  this.redirect('/project/administer/list');
+}
+
+function * deleteProject(){
+  var data = yield parse(this);
+  console.log(data);
+  var collection = db.collection('information');
+  var data = yield collection.remove({"id" : parseInt(data.id), "name" : data.name, "sex" : data.sex, "old" : data.old, "birthday" : data.birthday});
+  this.redirect('/project/administer/list');
 }
 
 function * staff(){
@@ -70,8 +257,8 @@ function * staff(){
   this.body = yield render('staff',data[6]);
 }
 
-function * admin(){
-  this.body = yield render('admin');
+function * staffAdmin(){
+  this.body = yield render('staffAdmin');
 }
 
 function * adminData(){
@@ -121,8 +308,8 @@ function * list(){
 }
 
 
-function * administer(){
-  this.body = yield render('administer');
+function * staffAdminister(){
+  this.body = yield render('staffAdminister');
 }
 
 function * adminInformation(){
@@ -134,7 +321,7 @@ function * adminInformation(){
     dataArray[i] = {"td" : i+1,"id" : data[i].id, "name" : data[i].name, "sex" : data[i].sex, "old" : data[i].old, "birthday" : data[i].birthday};
     count = data[i].id+1;
   }
-  this.body = yield render('administer',{subject:"information",
+  this.body = yield render('staffAdminister',{subject:"information",
                                         title:{"t1":"數量","t2":"id","t3":"name","t4":"sex","t5":"old","t6":"birthday","t7":"動作"},
                                         apple:dataArray,
                                         countId:count,
@@ -151,7 +338,7 @@ function * adminPay(){
     dataArray[i] = {"td" : i+1,"id" : data[i].id, "name" : data[i].name, "month" : data[i].month, "money" : data[i].money};
     count = data[i].id+1;
   }
-  this.body = yield render('administer',{subject:"pay",
+  this.body = yield render('staffAdminister',{subject:"pay",
                                          title:{"t1":"數量","t2":"id","t3":"name","t4":"month","t5":"money","t6":"動作"},
                                          apple:dataArray,
                                          countId:count,
@@ -168,7 +355,7 @@ function * adminList(){
     dataArray[i] = {"td" : i+1,"id" : data[i].id, "name" : data[i].name, "project" : data[i].project, "date" : data[i].date, "hours" : data[i].hours};
     count = data[i].id+1;
   }
-  this.body = yield render('administer',{subject:"list",
+  this.body = yield render('staffAdminister',{subject:"list",
                                          title:{"t1":"數量","t2":"id","t3":"name","t4":"project","t5":"date","t6":"hours","t7":"動作"},
                                          apple:dataArray,
                                          countId:count,

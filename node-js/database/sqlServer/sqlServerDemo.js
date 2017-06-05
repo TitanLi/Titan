@@ -6,11 +6,11 @@ var app = koa();
 var router = new Router();
 
 var config = {
-  user:'sa',
-  password:'Lisheng0706',
-  server:'127.0.0.1',
+  user:'1410332011',
+  password:'S1410s332011',
+  server:'163.17.136.91',
   port:1433,
-  database: 'demo'
+  database: '1410332011'
 }
 
 router.get('/',function * (){
@@ -34,6 +34,7 @@ router.get('/select',function * (){
     sql.close();
     this.body = result.recordset;
   }catch(err){
+    console.log(err);
     this.body = 'select fail';
   }
 });
@@ -41,7 +42,7 @@ router.get('/select',function * (){
 router.get('/insert',function * (){
   try{
     var pool = yield sql.connect(config);
-    var result = yield pool.request().query("insert into apple(apple,apple1,id) values('8','apple',8)");
+    var result = yield pool.request().query("insert into apple(apple,apple1,id) values('1','apple',1)");
     console.log(result);
     sql.close();
     this.body = 'ok';

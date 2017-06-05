@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/picture/apple1.jpg">
+    <title>apple工程行</title>
+    <link href="/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <script src="/assets/js/ie-emulation-modes-warning.js"></script>
+    <link href="/css/project.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/admin.css">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Project name</a>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="admin">
+        <form action="/project/admin" method="post">
+          <h1>管理者登入</h1>
+          <p>帳號：</p>
+          <p><input type="text" placeholder="請輸入帳號" name="account"></input></p>
+          <p>密碼：</p>
+          <p><input type="password" placeholder="請輸入密碼" name="password"></input></p>
+          <div>{{ message }}</div>
+          <p><input type="submit" value="送出"></input></p>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

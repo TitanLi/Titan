@@ -4,24 +4,66 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>index</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="//resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-    $( function() {
-      $( "#datepicker" ).datepicker();
-    } );
-    </script>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./picture/apple1.jpg">
+
+    <title>apple工程行</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/customer.css" rel="stylesheet">
+    <script src="/assets/js/ie-emulation-modes-warning.js"></script>
   </head>
   <body>
-    <form action="/customer" method="post">
-      <h1>Hello customer</h1>
-      <p><a href="/">Index</a></p>
-      <p><a href="/project">Project</a></p>
-      <p><a href="/staff">Staff</a></p>
-      <p>Date: <input type="text" id="datepicker" name="date"></p>
-      <p><input type="submit" value="Create"></p>
-    </form>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Project name</a>
+            <form class="navbar-form navbar-right" action="/customer" method="post">
+              <input type="text" class="form-control" placeholder="Search name..." name="search">
+              <input type="submit" value="Create">
+            </form>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="/customer/admin">管理 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/customer/information">全部顧客</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="sub-header">{{subject}}</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  {% for titleItem in title %}
+                    <th>{{ titleItem }}</th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for a in apple %}
+                <tr>
+                  {% for item in a%}
+                    <td>{{ item }}</td>
+                  {% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
   </body>
 </html>
