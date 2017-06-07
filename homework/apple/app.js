@@ -52,12 +52,15 @@ app.use(route.post('/insert/project',insertProject));
 app.use(route.post('/update/project',updateProject));
 app.use(route.post('/delete/project',deleteProject));
 app.use(route.post('/admin',adminData));
+app.use(route.post('/search/information',searchInformation));
 app.use(route.post('/insert/information',insertInformation));
 app.use(route.post('/update/information',updateInformation));
 app.use(route.post('/delete/information',deleteInformation));
+app.use(route.post('/search/pay',searchPay));
 app.use(route.post('/insert/pay',insertPay));
 app.use(route.post('/update/pay',updatePay));
 app.use(route.post('/delete/pay',deletePay));
+app.use(route.post('/search/list',searchList));
 app.use(route.post('/insert/list',insertList));
 app.use(route.post('/update/list',updateList));
 app.use(route.post('/delete/list',deleteList));
@@ -128,7 +131,7 @@ function * customerSearch(date){
     dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "sex" : data[i].sex, "old" : data[i].old, "birthday" : data[i].birthday};
   }
   this.body = yield render('customer',{subject:"information",
-                                    title:{"t1":"數量","t2":"id","t3":"name","t4":"sex","t5":"old","t6":"birthday","t7":"動作"},
+                                    title:{"t1":"id","t2":"name","t3":"sex","t4":"old","t5":"birthday"},
                                     apple:dataArray});
 }
 
@@ -220,7 +223,7 @@ function * projectSearch(date){
     dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "sex" : data[i].sex, "old" : data[i].old, "birthday" : data[i].birthday};
   }
   this.body = yield render('project',{subject:"information",
-                                    title:{"t1":"數量","t2":"id","t3":"name","t4":"sex","t5":"old","t6":"birthday","t7":"動作"},
+                                    title:{"t1":"id","t2":"name","t3":"sex","t4":"old","t5":"birthday"},
                                     apple:dataArray});
 }
 
@@ -363,6 +366,20 @@ function * adminList(){
                                          value:"新增"});
 }
 
+function * searchInformation(date){
+  var data1 = yield parse(this);
+  console.log(data1);
+  var collection = db.collection('information');                           //選擇collection為information
+  var data = yield collection.find({"name":data1.search}).toArray();
+  var dataArray = [];
+  for(let i=0;i<data.length;i++){
+    dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "sex" : data[i].sex, "old" : data[i].old, "birthday" : data[i].birthday};
+  }
+  this.body = yield render('staff',{subject:"information",
+                                    title:{"t1":"id","t2":"name","t3":"sex","t4":"old","t5":"birthday"},
+                                    apple:dataArray});
+}
+
 function * insertInformation(){
   var data = yield parse(this);
   var insertData = {"id" : count, "name" : data.name, "sex" : data.sex, "old" : data.old, "birthday" : data.birthday};
@@ -390,6 +407,20 @@ function * deleteInformation(){
   this.redirect('/administer/information');
 }
 
+function * searchPay(date){
+  var data1 = yield parse(this);
+  console.log(data1);
+  var collection = db.collection('pay');                           //選擇collection為information
+  var data = yield collection.find({"name":data1.search}).toArray();
+  var dataArray = [];
+  for(let i=0;i<data.length;i++){
+    dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "month" : data[i].month, "money" : data[i].money};
+  }
+  this.body = yield render('staff',{subject:"pay",
+                                    title:{"t1":"id","t2":"name","t3":"month","t4":"money"},
+                                    apple:dataArray});
+}
+
 function * insertPay(){
   var data = yield parse(this);
   var insertData = {"id" : parseInt(data.id), "name" : data.name, "month" : data.month, "money" : data.money};
@@ -415,6 +446,20 @@ function * deletePay(){
   var collection = db.collection('pay');
   var data = yield collection.remove({"id" : parseInt(data.id), "name" : data.name, "month" : data.month, "money" : data.money});
   this.redirect('/administer/pay');
+}
+
+function * searchList(date){
+  var data1 = yield parse(this);
+  console.log(data1);
+  var collection = db.collection('list');                           //選擇collection為information
+  var data = yield collection.find({"name":data1.search}).toArray();
+  var dataArray = [];
+  for(let i=0;i<data.length;i++){
+    dataArray[i] = {"id" : data[i].id, "name" : data[i].name, "project" : data[i].project, "date" : data[i].date, "hours" : data[i].hours};
+  }
+  this.body = yield render('staff',{subject:"list",
+                                    title:{"t1":"id","t2":"name","t3":"project","t4":"date","t5":"hours"},
+                                    apple:dataArray});
 }
 
 function * insertList(){
