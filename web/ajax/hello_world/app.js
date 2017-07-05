@@ -12,7 +12,6 @@ app.use(json());
 app.use(logger());
 app.use(bodyParser());
 app.use(serve(__dirname+'/lib'));
-
 app.use(route.get('/',index));
 app.use(route.post('/check',checkData));
 
@@ -27,9 +26,7 @@ function * checkData(){
   }else{
     this.body=false;
   }
-
 }
-
 
 app.listen(3000);
 console.log('listening on port 3000');
