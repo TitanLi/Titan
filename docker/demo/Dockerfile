@@ -25,4 +25,3 @@ ENV PATH $NVM_DIR/v$NODE_VERSION/bin:$PATH
 # inatall vim
 RUN apt-get install -v vim
 WORKDIR /root
-USER user
