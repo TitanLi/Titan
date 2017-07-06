@@ -1,7 +1,6 @@
 var koa = require('koa');
 var route = require('koa-route');
 var logger = require('koa-logger');
-var serve = require('koa-static');
 var json = require('koa-json');
 var bodyParser = require('koa-bodyparser');
 var views = require('co-views');
