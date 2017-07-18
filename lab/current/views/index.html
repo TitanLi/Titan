@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>電流統計系統</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+    <script>
+      var socket = io.connect('http://127.0.0.1:3000');   // 連線至伺服器
+      socket.on('event',function(data){
+        $('#date').text(data.date)
+      });
+      socket.on('power',function(data){
+        $('#power').text(data.date)
+      });
+      socket.on('price',function(data){
+        $('#cost').text(data.date)
+      });
+      socket.on('money',function(data){
+        $('#money').text(data.date)
+      });
+
+      function data(){
+        socket.emit('client_data', {
+          'data': $('#price').val()
+        });
+      }
+    </script>
+  </head>
+
+  <body bgcolor="orange">
+    <div style="text-align:center;padding-top: 196px;font-size:3cm;">目前電流</div>
+    <div id="date" style="text-align:center;font-size:1.6cm;"></div>
+    <div style="text-align:center;font-size:1cm;">目前使用度數:<b id="power" style="text-align:center;font-size:1cm;"></b></div>
+    <div style="text-align:center;font-size:1cm;">目前每度費率：<b id="cost" style="text-align:center;font-size:1cm;"></b></div>
+    <div style="text-align:center;font-size:1cm;">目前應繳金額：<b id="money" style="text-align:center;font-size:1cm;"></b></div>
+    <div style="text-align:center;font-size:1cm;">
+      <input type="text" id="price"></input>
+      <input type="button" value="送出" onclick="javascript:data()"></input>
+    </div>
+  </body>
+</html>
