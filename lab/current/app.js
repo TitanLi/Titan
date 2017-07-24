@@ -28,7 +28,7 @@ port.on('open', function() {
               money = power * price;
               console.log(money);
               console.log(data);
-              client.emit('event',{date:data});       //發送資料
+              client.emit('event',{date:data});        //發送資料
               client.emit('power',{date:power});       //發送資料
               client.emit('price',{date:price});       //發送資料
               client.emit('money',{date:money});       //發送資料
