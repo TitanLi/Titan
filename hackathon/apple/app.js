@@ -138,6 +138,7 @@ function * sensorUpdate(){
   var sensorID = request.sensorID;
   var containerID = request.containerID;
   var containerName = request.containerName;
+  var brand = request.brand;
   var collection = db.collection('sensor');
   var sensorStatus = yield collection.findOne({containerID:containerID});
   if(userID != "" && sensorID != "" && containerName != "" && containerID != ""){
@@ -145,7 +146,8 @@ function * sensorUpdate(){
       '$set': {
           'userID':userID,
           'sensorID':sensorID,
-          'containerName':containerName
+          'containerName':containerName,
+          'brand':brand
       }
     });
     this.body = {
@@ -160,7 +162,7 @@ function * sensorUpdate(){
 
 function * mbedSensor(){
   var collection = db.collection('sensor');
-  var data = yield collection.find({sensorID:this.params.sensor}).toArray();
+  var data = yield collection.find({sensorID:this.params.sensorID}).toArray();
   var sensorAry = new Array();
   yield function(done){
     for(var i=0 ; i<data.length ; i++){
