@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>進度表</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script>
+      var socket = io.connect('http://127.0.0.1:3000');   // 連線至伺服器
+      socket.on('event',function(data){
+        $('.drives').text(data.sensorID);
+        $('#weight1').text(data.R_1);
+        $('#weight2').text(data.R_2);
+        $('#weight3').text(data.R_3);
+        $('#weight4').text(data.R_4);
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1>Demo</h1>
+    <table class="table">
+      <tr>
+        <td>裝置ID</td>
+        <td>容器編號</td>
+        <td>剩餘重量</td>
+      </tr>
+      <tr>
+        <td class="drives">sensorID</td>
+        <td id="container1">1</td>
+        <td id="weight1">剩餘重量</td>
+      </tr>
+      <tr>
+        <td class="drives">sensorID</td>
+        <td id="container2">2</td>
+        <td id="weight2">剩餘重量</td>
+      </tr>
+      <tr>
+        <td class="drives">sensorID</td>
+        <td id="container3">3</td>
+        <td id="weight3">剩餘重量</td>
+      </tr>
+      <tr>
+        <td class="drives">sensorID</td>
+        <td id="container4">4</td>
+        <td id="weight4">剩餘重量</td>
+      </tr>
+    </table>
+  </body>
+</html>
