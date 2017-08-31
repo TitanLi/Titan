@@ -42,7 +42,8 @@ function * createUser(){
       var data = {
         userName : userName,
         account : account,
-        password : password
+        password : password,
+        setTime : new Date().getTime()
       }
       yield collection.insert(data);
       this.body = {message:"成功"};
