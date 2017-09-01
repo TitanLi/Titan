@@ -24,8 +24,10 @@ router.post('/sensor/create',createSensor);
 router.post('/sensor/status',sensorStatus);
 router.post('/sensor/update',sensorUpdate);
 router.post('/sensor/delete',sensorDelete);
+router.post('/customer/opinion',customerOpinion);
 router.get('/mbed/:deviceID/:w1/:w2/:w3/:w4/',mbedSensor);
 router.get('/popular',popular);
+router.get('/customer/opinion',opinion);
 
 function * createUser(){
   var request = this.request.body;
@@ -36,7 +38,6 @@ function * createUser(){
   var judgmentAccount = yield collection.find({account:account}).toArray();
   if(judgmentAccount != ""){
     this.body = {message:"此信箱已註冊"};
-    console.log(1);
   }else{
     if(userName != null && account != null && password != null){
       var data = {
@@ -51,7 +52,6 @@ function * createUser(){
       this.body = {message:"輸入格式錯誤"};
     }
   }
-  console.log(userName,account,password);
 }
 
 function * login(){
@@ -60,7 +60,6 @@ function * login(){
   var password = request.password;
   var collection = db.collection('user');
   var judgmentAccount = yield collection.findOne({account:account,password:password});
-  console.log(judgmentAccount);
   if(judgmentAccount != null){
     this.body = {
       message : "成功",
@@ -277,26 +276,45 @@ function * sensorDelete(){
   }
 }
 
+function * customerOpinion(){
+  var request = this.request.body;
+  var userID = request.userID;
+  var errMsg = request.errMsg;
+  var customerMsg = request.customerMsg;
+
+  var collection = db.collection('message');
+  yield collection.insert({
+    userID : userID,
+    errMsg : errMsg,
+    customerMsg : customerMsg,
+    setTime : new Date().getTime()
+  });
+
+  this.body = {
+    message : "成功"
+  }
+}
+
 function * mbedSensor(){
   var collection = db.collection('sensor');
   yield collection.update({deviceID:this.params.deviceID,containerPosition:"1"},{
     '$set': {
-        'weight': this.params.w1/1000
+        'weight': this.params.w1/1000*100
     }
   });
   yield collection.update({deviceID:this.params.deviceID,containerPosition:"2"},{
     '$set': {
-        'weight': this.params.w2/1000
+        'weight': this.params.w2/1000*100
     }
   });
   yield collection.update({deviceID:this.params.deviceID,containerPosition:"3"},{
     '$set': {
-        'weight': this.params.w3/1000
+        'weight': this.params.w3/1000*100
     }
   });
   yield collection.update({deviceID:this.params.deviceID,containerPosition:"4"},{
     '$set': {
-        'weight': this.params.w4/1000
+        'weight': this.params.w4/1000*100
     }
   });
   this.body = {
@@ -341,6 +359,23 @@ function * popular(){
   yield apple();
   this.body = brandPopular;
 }
+
+function * opinion(){
+    var collection = db.collection('message');
+    var data = yield collection.find({}).toArray();
+    var dataAry = new Array();
+    for(var i=0 ; i<data.length ; i++){
+      dataAry.push({
+        userID : data[i].userID,
+        errMsg : data[i].errMsg,
+        customerMsg : data[i].customerMsg,
+        setTime : data[i].setTime
+      });
+    }
+
+    this.body = dataAry;
+}
+
 app.use(router.middleware());
 app.listen(3000,function(){
   console.log('listening port on 3000');
