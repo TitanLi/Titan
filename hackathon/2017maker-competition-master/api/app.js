@@ -178,34 +178,22 @@ function * sensorStatus(){
   var collection = db.collection('sensor');
   var sensorStatus = yield collection.find({userID:userID}).toArray();
   var data = new Array();
-  var device = new Array();
-  for(var i=0 ; i<sensorStatus.length ; i++){
-    device.push(sensorStatus[i].deviceID);
-  }
-  var result=device.filter(function(element, index, arr){
-    return arr.indexOf(element)=== index;
-  });
-  yield function * (){
-    for(key in result){
-      var collection = db.collection('sensor');
-      var handleData = yield collection.find({deviceID:result[key]}).toArray();
-      var dataAry = new Array();
-      for(sensor in handleData){
-        dataAry.push({
-          "containerPosition": handleData[sensor].containerPosition,
-          "containerName": handleData[sensor].containerName,
-          "brand": handleData[sensor].brand,
-          "percent": handleData[sensor].weight
-        })
-      }
+  yield function(done){
+    for(var i=0 ; i<sensorStatus.length ; i++){
       let sensorData = {
-        "deviceID" : result[key],
-        "data":dataAry
+        deviceID : sensorStatus[i].deviceID,
+        containerPosition : sensorStatus[i].containerPosition,
+        containerName : sensorStatus[i].containerName,
+        brand : sensorStatus[i].brand,
+        percent : sensorStatus[i].weight
       }
       data.push(sensorData);
     }
+    done();
   }
-  this.body = data
+  this.body = {
+    data : data
+  }
 }
 
 function * sensorUpdate(){

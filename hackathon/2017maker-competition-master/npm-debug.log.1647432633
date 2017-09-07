@@ -1,0 +1,21 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/ubuntu/.nvm/versions/node/v6.9.4/bin/node',
+1 verbose cli   '/home/ubuntu/.nvm/versions/node/v6.9.4/bin/npm',
+1 verbose cli   'init' ]
+2 info using npm@3.10.10
+3 info using node@v6.9.4
+4 verbose stack Error: write EIO
+4 verbose stack     at exports._errnoException (util.js:1022:11)
+4 verbose stack     at WriteWrap.afterWrite (net.js:801:14)
+5 verbose cwd /home/ubuntu/hackathon
+6 error Linux 4.4.0-92-generic
+7 error argv "/home/ubuntu/.nvm/versions/node/v6.9.4/bin/node" "/home/ubuntu/.nvm/versions/node/v6.9.4/bin/npm" "init"
+8 error node v6.9.4
+9 error npm  v3.10.10
+10 error code EIO
+11 error errno EIO
+12 error syscall write
+13 error write EIO
+14 error If you need help, you may report this error at:
+14 error     <https://github.com/npm/npm/issues>
+15 verbose exit [ 1, true ]

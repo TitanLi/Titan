@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+    background-image: linear-gradient(to top, #517fa4 0%, #243949 100%) ;
+    height: 100vh;
+    color: #fff;
+  }
+  .margintop30{
+    margin-top:30px;
+  }
+.inputPassword
+    {
+    border: 0;
+    border-radius: 8px;
+    margin:3px;
+    height:34px;
+    width:300px;
+    background:url('pswInput_01.png') ;
+    color:#2F4A5F;
+    padding-left:45px; 
+    font-size:15px;
+    }
+.inputUser{
+    border: 0;
+    border-radius: 8px;
+    margin:3px;
+    height:34px;
+    width:300px;
+    background:url('userInput_01.png') ;
+    color:#2F4A5F;
+    padding-left:45px;
+    font-size:15px;   
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #2F4A5F;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: #2F4A5F;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: #2F4A5F;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: #2F4A5F;
+  }
+p{
+  color: rgba(255,255,255, 0.7);
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row" style="margin-top:200px;">
+            <div class="col-md-offset-4 col-xs-offset-2">
+                <img src="PINSENT.png" style="width:300px;margin-left:5px">
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:30px">
+            <div class="col-md-offset-4 col-xs-offset-2">
+                <p>PINSENT 管理系統</p>
+                <form action="/" method="post">
+                    <input class="inputUser" type="text" placeholder="Admin"  name="adminLogin" />
+                    <br>
+                    <input class="inputPassword" type="password" placeholder="Password" name="adminPassword"/>
+                    <br>
+                    <input type="submit" class="btn btn-success" value="LOGIN" style="width:300px;margin:3px;margin-top:px">
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

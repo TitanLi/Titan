@@ -1,0 +1,25 @@
+{
+  "name": "hackathon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^1.2.4",
+    "koa-bodyparser": "^2.3.0",
+    "koa-router": "^5.4.0",
+    "mongodb": "^2.2.15"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imac-iot/2017maker-competition.git"
+  },
+  "bugs": {
+    "url": "https://github.com/imac-iot/2017maker-competition/issues"
+  },
+  "homepage": "https://github.com/imac-iot/2017maker-competition#readme"
+}

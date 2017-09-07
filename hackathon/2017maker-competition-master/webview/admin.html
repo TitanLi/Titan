@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <style>
+    .hColor{
+      color: #F38181;
+    }
+    .navbar-inverse{
+      background-color:#517fa4;
+      border-color:#517fa4;
+      
+    }
+    a{
+      color:#979797;
+      
+    }
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+      color:#517fa4;
+    }
+    td{
+      color:#979797;
+    }
+  </style>
+</head>
+<body>
+<div class="container" style="margin-top:1%">
+  <div class="row">
+      <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">
+                <img alt="Brand" src="./PINSENT.png" height="25px">
+              </a>
+            </div>
+          </div>
+        </nav>
+  </div>
+  
+  <ul class="nav nav-tabs" style="margin-top:5px;">
+    <!--Hamburger Menu-->
+    <li class="active"><a data-toggle="tab" href="#home">使用者管理</a></li>
+    <li><a data-toggle="tab" href="#menu1">品牌資訊</a></li>
+    <li><a data-toggle="tab" href="#menu2">反饋</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <br>
+      <table class="table table-hover  table-active">
+        <thead>
+            <tbody>
+            <tr>
+                <th>#</th>
+                <th>name</th>
+                <th>account</th>
+                <th>userID</th>
+                <th>insertTime</th>
+            </tr>
+            {% for x in num %}
+            <!-- num數量 -->
+            {% if loop %}{% endif %}
+            <tr>
+                <td>{{ x+1 }}</td>
+                <td>{{ userName[num.length - x -1] }}</td>
+                <td>{{ userAccount[num.length - x-1] }}</td>
+                <td>{{ userId[num.length - x-1] }}</td>
+                <td>{{ time[num.length - x-1] }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+    </table>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <div class="row">
+          <div class="col-md-6 "><canvas id="doughnut-chart" height="250"></canvas></div>
+      <div class="col-md-6 col-sm-12 col-xs-12"></div>
+
+      </div>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+  var brand =["{{ brand.join('","') }}"];
+  console.log(brand);
+  // console.log('["'+brand.join('"22"')+'"]');
+  var num = [ {{ brandNum}} ];
+  new Chart(document.getElementById("doughnut-chart"), {
+    type: 'doughnut',
+    data: {
+      datasets: [
+        {
+          backgroundColor: ["#F38181","#FCE38A"],
+          data: num,
+        }
+      ],
+      labels:brand
+    },
+    options: {
+      title: {
+        display: true,
+        // text: 'Predicted world population (millions) in 2017'
+      }
+    }
+  });
+  </script>
+
+</html>
