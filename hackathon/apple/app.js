@@ -79,10 +79,11 @@ function * createDevice(){
   var request = this.request.body;
   var userID = request.userID;
   var deviceID = request.deviceID;
+  var deviceName = request.deviceName;
   var collection = db.collection('device');
   var findDev = yield collection.findOne({deviceID:deviceID});
-  if(findDev == null){
-    yield collection.insert({'deviceID':deviceID,'setTime':new Date().getTime()});
+  if(findDev == null && userID != null && deviceID != null && deviceName != null){
+    yield collection.insert({'userID':userID,'deviceID':deviceID,'deviceName':deviceName,'setTime':new Date().getTime()});
     this.body = {
       message : "成功"
     }
@@ -198,8 +199,11 @@ function * sensorStatus(){
           "percent": handleData[sensor].weight
         })
       }
+      var collectionDevice = db.collection('device');
+      var deviceData = yield collectionDevice.findOne({deviceID:result[key]});
       let sensorData = {
         "deviceID" : result[key],
+        "deviceName" : deviceData.deviceName,
         "data":dataAry
       }
       data.push(sensorData);
