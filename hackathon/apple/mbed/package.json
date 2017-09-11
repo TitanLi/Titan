@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node request.js"
   },
   "author": "Titan",
   "license": "ISC",
@@ -15,10 +15,8 @@
     "koa-router": "^5.4.0",
     "koa-static": "^2.0.0",
     "koa-views": "^4.1.0",
+    "request": "^2.81.0",
     "socket.io": "^1.7.3",
     "swig": "^1.4.2"
-  },
-  "scripts":{
-    "start":"node app.js"
   }
 }

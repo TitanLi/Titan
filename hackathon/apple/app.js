@@ -25,9 +25,12 @@ router.post('/sensor/status',sensorStatus);
 router.post('/sensor/update',sensorUpdate);
 router.post('/sensor/delete',sensorDelete);
 router.post('/customer/opinion',customerOpinion);
+router.post('/customer/opinion/delete',customerOpinionDelete);
 router.get('/mbed/:deviceID/:w1/:w2/:w3/:w4/',mbedSensor);
 router.get('/popular',popular);
 router.get('/customer/opinion',opinion);
+router.get('/user/information',userInf);
+router.get('/device/information',deviceInf);
 
 function * createUser(){
   var request = this.request.body;
@@ -177,37 +180,59 @@ function * sensorStatus(){
   var request = this.request.body;
   var userID = request.userID;
   var collection = db.collection('sensor');
-  var sensorStatus = yield collection.find({userID:userID}).toArray();
+  // var sensorStatus = yield collection.find({userID:userID}).toArray();
   var data = new Array();
-  var device = new Array();
-  for(var i=0 ; i<sensorStatus.length ; i++){
-    device.push(sensorStatus[i].deviceID);
+  var result = new Array();
+  // var device = new Array();
+  // for(var i=0 ; i<sensorStatus.length ; i++){
+  //   device.push(sensorStatus[i].deviceID);
+  // }
+  // var result=device.filter(function(element, index, arr){
+  //   return arr.indexOf(element)=== index;
+  // });
+  var collectionDevice = db.collection('device');
+  var deviceData = yield collectionDevice.find({userID:userID}).toArray();
+  for(key in deviceData){
+    result.push(deviceData[key].deviceID);
   }
-  var result=device.filter(function(element, index, arr){
-    return arr.indexOf(element)=== index;
-  });
   yield function * (){
-    for(key in result){
-      var collection = db.collection('sensor');
-      var handleData = yield collection.find({deviceID:result[key]}).toArray();
-      var dataAry = new Array();
-      for(sensor in handleData){
-        dataAry.push({
-          "containerPosition": handleData[sensor].containerPosition,
-          "containerName": handleData[sensor].containerName,
-          "brand": handleData[sensor].brand,
-          "percent": handleData[sensor].weight
-        })
+    // console.log(result[0] != null);
+    // if(result[0] != null){
+      for(key in result){
+        var collection = db.collection('sensor');
+        var handleData = yield collection.find({deviceID:result[key]}).toArray();
+        var dataAry = new Array();
+        for(sensor in handleData){
+          dataAry.push({
+            "containerPosition": handleData[sensor].containerPosition,
+            "containerName": handleData[sensor].containerName,
+            "brand": handleData[sensor].brand,
+            "percent": handleData[sensor].weight
+          })
+        }
+        var collectionDevice = db.collection('device');
+        var deviceData = yield collectionDevice.findOne({deviceID:result[key]});
+        let sensorData = {
+          "deviceID" : result[key],
+          "deviceName" : deviceData.deviceName,
+          "data":dataAry
+        }
+        data.push(sensorData);
       }
-      var collectionDevice = db.collection('device');
-      var deviceData = yield collectionDevice.findOne({deviceID:result[key]});
-      let sensorData = {
-        "deviceID" : result[key],
-        "deviceName" : deviceData.deviceName,
-        "data":dataAry
-      }
-      data.push(sensorData);
-    }
+    // }else{
+    //   var collectionDevice = db.collection('device');
+    //   var deviceData = yield collectionDevice.find({userID:userID}).toArray();
+    //   console.log(123);
+    //   console.log(deviceData);
+    //   for(key in deviceData){
+    //     let sensorData = {
+    //       "deviceID" : deviceData[key]._id,
+    //       "deviceName" : deviceData[key].deviceName,
+    //       "data":[]
+    //     }
+    //     data.push(sensorData);
+    //   }
+    // }
   }
   this.body = data
 }
@@ -311,33 +336,75 @@ function * customerOpinion(){
   }
 }
 
+function * customerOpinionDelete(){
+  var request = this.request.body;
+  var userID = request.userID;
+  var errMsg = request.errMsg;
+  var customerMsg = request.customerMsg;
+  if(userID != null && errMsg != null && customerMsg != null ){
+    var collection = db.collection('message');
+    yield collection.remove({userID:userID,errMsg:errMsg,customerMsg:customerMsg});
+    this.body = {
+      message : "成功"
+    }
+  }else {
+    this.body = {
+      message : "格式錯誤"
+    }
+  }
+}
+
 function * mbedSensor(){
   var collection = db.collection('sensor');
+  var w1=this.params.w1;
+  var w2=this.params.w2;
+  var w3=this.params.w3;
+  var w4=this.params.w4;
+  if(w1>1450){
+    w1=1450;
+  }else if (w1<0) {
+    w1=0;
+  }
+  if(w2>1450){
+    w2=1450;
+  }else if (w2<0) {
+    w2=0;
+  }
+  if(w3>1450){
+    w3=1450;
+  }else if (w3<0) {
+    w3=0;
+  }
+  if(w4>1450){
+    w4=1450;
+  }else if (w4<0) {
+    w4=0;
+  }
   yield collection.update({deviceID:this.params.deviceID,containerPosition:"1"},{
     '$set': {
-        'weight': this.params.w1/1000*100
+        'weight': w1/1450*100
     }
   });
   yield collection.update({deviceID:this.params.deviceID,containerPosition:"2"},{
     '$set': {
-        'weight': this.params.w2/1000*100
+        'weight': w2/1450*100
     }
   });
   yield collection.update({deviceID:this.params.deviceID,containerPosition:"3"},{
     '$set': {
-        'weight': this.params.w3/1000*100
+        'weight': w3/1450*100
     }
   });
   yield collection.update({deviceID:this.params.deviceID,containerPosition:"4"},{
     '$set': {
-        'weight': this.params.w4/1000*100
+        'weight': w4/1450*100
     }
   });
   this.body = {
-    R_1:this.params.w1/1000*100,
-    R_2:this.params.w2/1000*100,
-    R_3:this.params.w3/1000*100,
-    R_4:this.params.w4/1000*100
+    R_1:w1/1450*100,
+    R_2:w2/1450*100,
+    R_3:w3/1450*100,
+    R_4:w4/1450*100
   }
 }
 
@@ -392,7 +459,38 @@ function * opinion(){
     this.body = dataAry;
 }
 
+function * userInf(){
+  var collection = db.collection('user');
+  var data = yield collection.find({}).toArray();
+  var dataAry = new Array();
+  for(key in data){
+    let userData = {
+      userName:data[key].userName,
+      account:data[key].account,
+      userID:data[key]._id,
+      setTime:data[key].setTime,
+    }
+    dataAry.push(userData);
+  }
+  this.body = dataAry;
+}
+
+function * deviceInf(){
+  var collection = db.collection('device');
+  var data = yield collection.find({}).toArray();
+  var dataAry = new Array();
+  for(key in data){
+    let deviceData = {
+      userID:data[key].userID,
+      deviceID:data[key].deviceID,
+      deviceName:data[key].deviceName
+    }
+    dataAry.push(deviceData);
+  }
+  this.body = dataAry;
+}
+
 app.use(router.middleware());
-app.listen(3000,function(){
-  console.log('listening port on 3000');
+app.listen(5500,function(){
+  console.log('listening port on 5500');
 });
