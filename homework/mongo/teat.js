@@ -40,3 +40,16 @@ db.testData.aggregate([
     }
   }
 ])
+
+db.testData.mapReduce([
+  function(){
+    emit(this.name,this.old);
+  },
+  function(key,values){
+    return Array.sum(values);
+  },
+  {
+    query:{status:"normal"},
+    outresult:"old"
+  }
+])
