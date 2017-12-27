@@ -1,5 +1,5 @@
 //node.js buffer 預設編碼 utf8
-//buf.toString([encoding],start,end)
+//buf.toString([encoding],[start],[end])
 //編碼方式：ascii、utf8、utf16le、base64、binary、hex
 
 var buffer16 = new Buffer([0x6e,0x6f,0x64,0x65,0x6a,0x73]);
