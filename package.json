@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apiai": "^4.0.3",
     "async": "^2.6.0",
     "body-parser": "^1.17.1",
     "chart.js": "^2.6.0",
