@@ -12,6 +12,7 @@ app.use(json());
 app.use(logger());
 app.use(bodyParser());
 app.use(serve(__dirname+'/lib'));
+app.use(serve(__dirname+'/img'));
 
 app.use(route.get('/',index));
 
