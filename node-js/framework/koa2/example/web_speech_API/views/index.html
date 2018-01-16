@@ -15,11 +15,15 @@
     <!-- <img src="./20081214161948596.png" alt="Mountain View" style="width:360px;height:360px;position:absolute;top:50%;left:50%;margin-top:-180px;margin-left:-180px;"> -->
     <!-- https://dotblogs.com.tw/jellycheng/archive/2012/07/05/73227.aspx -->
     <select id="langCombo">
-      <option value="en-US">英文(美國)</option>
       <option value="cmn-Hant-TW">中文(台灣)</option>
+      <option value="en-US">英文(美國)</option>
     </select>
     <label id="infoBox" class="labelColor"></label><br />
     <input id="textBox" type="text" size="60" value=""/><BR/>
     <input id="startStopButton" class="Center" type="button" onclick="startButton(event)" />
+    <audio autoplay="autoplay">
+      <source src={{url}} type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
   </body>
 </html>

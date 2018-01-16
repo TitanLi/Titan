@@ -2,7 +2,7 @@
 //http://tts.itri.org.tw/index.php
 const TTSClient = require('itri-tts');
 const account = require('./config.json');
-const request = require('request');
+
 var tts = new TTSClient(account.accountID, account.password);
 
 var text = '您好，我是Bruce，感謝您使用工研院文字轉語音Web服務。'
