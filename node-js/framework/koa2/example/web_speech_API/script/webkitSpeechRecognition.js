@@ -3,6 +3,7 @@ var textBox; // 最終的辨識訊息 text input
 var startStopButton; // 「辨識/停止」按鈕
 var final_transcript = ''; // 最終的辨識訊息的變數
 var recognizing = false; // 是否辨識中
+var socket = io.connect('http://127.0.0.1:3000');
 
 function startButton(event) {
   infoBox = document.getElementById("infoBox"); // 取得訊息控制項 infoBox
@@ -49,8 +50,12 @@ if (!('webkitSpeechRecognition' in window)) {  // 如果找不到 window.webkitS
         interim_transcript += event.results[i][0].transcript; // 將其加入中間結果中
       }
     }
-    if (final_transcript.trim().length > 0) // 如果有最終辨識文字
+    if ((final_transcript.trim().length > 0)){ // 如果有最終辨識文字
         textBox.value = final_transcript; // 顯示最終辨識文字
+        socket.emit('message', final_transcript , function (data) {
+          console.log(data);
+        });
+      }
     if (interim_transcript.trim().length > 0) // 如果有中間辨識文字
         textBox.value = interim_transcript; // 顯示中間辨識文字
   };

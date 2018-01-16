@@ -27,8 +27,11 @@ router.get('/',async function(ctx){
   ctx.body = await render('index');
 });
 
-io.on('connection',() => {
+io.on('connection',(socket) => {
   console.log('a user connected');
+  socket.on('message', function(msg){
+    console.log('message: ' + msg);
+  });
 });
 
 server.listen(3000,function(){
