@@ -82,6 +82,7 @@
 
       recognition.onresult = function(event) { // 辨識有任何結果時
         var interim_transcript = ''; // 中間結果
+        final_transcript = ''; //清除結果
         for (var i = event.resultIndex; i < event.results.length; ++i) { // 對於每一個辨識結果
           if (event.results[i].isFinal) { // 如果是最終結果
             final_transcript += event.results[i][0].transcript; // 將其加入最終結果中
