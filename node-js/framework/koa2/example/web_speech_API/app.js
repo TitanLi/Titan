@@ -21,6 +21,7 @@ app.use(serve(__dirname+'/lib'));
 app.use(serve(__dirname+'/img'));
 app.use(serve(__dirname+'/css'));
 app.use(serve(__dirname+'/script'));
+app.use(serve(__dirname+'/config'));
 app.use(router.routes());
 
 router.get('/',async function(ctx){

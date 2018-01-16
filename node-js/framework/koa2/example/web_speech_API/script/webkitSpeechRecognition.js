@@ -3,7 +3,11 @@ var textBox; // 最終的辨識訊息 text input
 var startStopButton; // 「辨識/停止」按鈕
 var final_transcript = ''; // 最終的辨識訊息的變數
 var recognizing = false; // 是否辨識中
-var socket = io.connect('http://127.0.0.1:3000');
+//引入JSON或javascript
+//https://gist.github.com/thiagodebastos/08ea551b97892d585f17
+// var config = JSON.parse(data);
+// var socket = io.connect(config.socket_ip);
+var socket = io.connect(data.socket_ip);
 
 function startButton(event) {
   infoBox = document.getElementById("infoBox"); // 取得訊息控制項 infoBox
