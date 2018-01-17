@@ -8,6 +8,11 @@ var recognizing = false; // 是否辨識中
 // var config = JSON.parse(data);
 // var socket = io.connect(config.socket_ip);
 var socket = io.connect(data.socket_ip);
+socket.on('news', function (data) {
+    var audio = document.getElementById('myAudio');
+    audio.src = data.url;
+    audio.play();
+});
 
 function startButton(event) {
   infoBox = document.getElementById("infoBox"); // 取得訊息控制項 infoBox
@@ -49,16 +54,16 @@ if (!('webkitSpeechRecognition' in window)) {  // 如果找不到 window.webkitS
     final_transcript = ''; //清除結果
     for (var i = event.resultIndex; i < event.results.length; ++i) { // 對於每一個辨識結果
       if (event.results[i].isFinal) { // 如果是最終結果
-        final_transcript += event.results[i][0].transcript; // 將其加入最終結果中
+        final_transcript = event.results[i][0].transcript; // 將其加入最終結果中
+        socket.emit('message', final_transcript , function (data) {
+          console.log(data);
+        });
       } else { // 否則
         interim_transcript += event.results[i][0].transcript; // 將其加入中間結果中
       }
     }
     if ((final_transcript.trim().length > 0)){ // 如果有最終辨識文字
         textBox.value = final_transcript; // 顯示最終辨識文字
-        socket.emit('message', final_transcript , function (data) {
-          console.log(data);
-        });
       }
     if (interim_transcript.trim().length > 0) // 如果有中間辨識文字
         textBox.value = interim_transcript; // 顯示中間辨識文字

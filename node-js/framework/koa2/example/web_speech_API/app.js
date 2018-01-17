@@ -22,7 +22,19 @@ const server = http.createServer(app.callback());
 const io = socket(server);
 
 var convertID,url,status;
-var bot,botMsg;
+var bot;
+var apiStatus = false;
+
+var options = {
+  TTStext: '您好，我是Bruce，感謝您使用工研院文字轉語音Web服務。',
+  TTSSpeaker: 'Angela',  // Bruce, Theresa, Angela, default = Bruce
+  volume: 100,          // 0 ~ 100, default = 100
+  speed: 0,             // -10 ~ 10, default = 0
+  outType: 'wav',       // wav, flv
+  PitchLevel: 0,        // -10 ~ 10, default = 0
+  PitchSign: 0,         // 0, 1, 2, default = 0
+  PitchScale: 5         // 0 ~ 20, default = 5
+}
 
 app.use(json());
 app.use(logger());
@@ -44,21 +56,47 @@ app.context.render = co.wrap(render({
 router.get('/',index);
 
 async function index(ctx){
-  bot = new Bot(account.olamiURL,account.olamiAppKey,account.olamiAppSecret,"你是誰");
-  botMsg = await bot.naturalLanguage();
-  console.log(botMsg);
+  olami("你是誰");
+  ctx.body = await ctx.render('index');
+}
+
+//Socket.io connect
+io.on('connection',(socket) => {
+  console.log('a user connected');
+  var socket = socket;
+  socket.on('message', function(msg){
+    console.log('message: ' + msg);
+    olami(msg);
+  });
+});
+
+/*
+ * OLAMI API natural language
+ * @param msg the message from socket.io webkitSpeechRecognition final_transcript
+              or RESTful API get '/' who are you
+*/
+var olami = async function (msg){
+  //OLAMI natural language response
+  bot = new Bot(account.olamiURL,account.olamiAppKey,account.olamiAppSecret,msg);
+  //Change options TTStext value
+  options.TTStext = await bot.naturalLanguage();
+
+  //Create audio file .wav
   await new Promise (function(resolve,reject){
-    tts.ConvertSimple(botMsg, function (err, result) {
+    tts.ConvertAdvancedText(options, function (err, result) {
       if (err) throw err
       if (result.resultString == "success"){
+        //Get convert ID
         convertID = parseInt(result.resultConvertID);
         status = "";
-        resolve(convertID);
+        resolve();
       }
     });
   });
 
+  //Waiting itri tts create audio
   while (status != "completed") {
+    //Get audio .wav url
     await new Promise (function(resolve,reject){
       tts.GetConvertStatus(convertID, function (err, result) {
         if (err) throw err
@@ -71,15 +109,9 @@ async function index(ctx){
     });
   }
 
-  ctx.body = await ctx.render('index',{url:url});
+  //Socket emit audio src
+  io.emit('news',{url:url});
 }
-
-io.on('connection',(socket) => {
-  console.log('a user connected');
-  socket.on('message', function(msg){
-    console.log('message: ' + msg);
-  });
-});
 
 server.listen(3000,function(){
   console.log('listening on port 3000');
