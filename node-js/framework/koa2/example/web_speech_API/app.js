@@ -40,9 +40,9 @@ app.use(json());
 app.use(logger());
 app.use(bodyParser());
 app.use(serve(__dirname+'/lib'));
-app.use(serve(__dirname+'/img'));
-app.use(serve(__dirname+'/css'));
-app.use(serve(__dirname+'/script'));
+app.use(serve(__dirname+'/public/img'));
+app.use(serve(__dirname+'/public/css'));
+app.use(serve(__dirname+'/public/script'));
 app.use(serve(__dirname+'/config'));
 app.use(router.routes());
 
