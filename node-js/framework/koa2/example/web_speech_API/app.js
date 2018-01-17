@@ -11,15 +11,18 @@ const render = require('koa-swig');
 const co = require('co');
 
 const account = require('./test/config.json');
+//OLAMI教學：https://tw.olami.ai/wiki/?mp=sdk&content=sdk/nodejs/reference.html
+const Bot = require('./natural-language/test-input.js');
+
+const tts = new TTSClient(account.accountID, account.password);
 
 const app = new koa();
 const router = Router();
 const server = http.createServer(app.callback());
 const io = socket(server);
-const tts = new TTSClient(account.accountID, account.password);
 
-var text = '您好，我是Bruce';
 var convertID,url,status;
+var bot,botMsg;
 
 app.use(json());
 app.use(logger());
@@ -41,25 +44,27 @@ app.context.render = co.wrap(render({
 router.get('/',index);
 
 async function index(ctx){
+  bot = new Bot(account.olamiURL,account.olamiAppKey,account.olamiAppSecret,"你是誰");
+  botMsg = await bot.naturalLanguage();
+  console.log(botMsg);
   await new Promise (function(resolve,reject){
-    tts.ConvertSimple(text, function (err, result) {
+    tts.ConvertSimple(botMsg, function (err, result) {
       if (err) throw err
       if (result.resultString == "success"){
         convertID = parseInt(result.resultConvertID);
-        resolve();
+        status = "";
+        resolve(convertID);
       }
     });
   });
 
   while (status != "completed") {
     await new Promise (function(resolve,reject){
-      console.log(convertID);
       tts.GetConvertStatus(convertID, function (err, result) {
         if (err) throw err
         if (result.resultString == "success"){
           url = result.resultUrl;
           status = result.status;
-          console.log(result);
           resolve();
         }
       });
