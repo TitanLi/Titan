@@ -7,7 +7,7 @@
 先前作業：
 
 1. 工研院文字轉語音web服務帳號註冊
-2. 歐拉蜜OLAMI帳號註冊、自然語言語意互動管理系開啟服務、建立新應用、查看Key取得所需資訊
+2. 歐拉蜜OLAMI帳號註冊、自然語言語意互動管理系統開啟服務、建立新應用、查看Key取得所需資訊
 3. git clone檔案
 4. 複製/config/config.json.bak =&gt; /config/config.json
 5. 更改/config/config.json（account、password、App Key、App Secret）
