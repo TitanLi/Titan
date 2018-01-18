@@ -10,7 +10,7 @@ const TTSClient = require('itri-tts');
 const render = require('koa-swig');
 const co = require('co');
 
-const account = require('./test/config.json');
+const account = require('./config/config.json');
 //OLAMI教學：https://tw.olami.ai/wiki/?mp=sdk&content=sdk/nodejs/reference.html
 const Bot = require('./natural-language/test-input.js');
 

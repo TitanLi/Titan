@@ -1,7 +1,0 @@
-{
-  "accountID" : "tts-accountID",
-  "password" : "tts-password",
-  "olamiURL" : "https://tw.olami.ai/cloudservice/api",
-  "olamiAppKey" : "OLAMI-App-Key",
-  "olamiAppSecret" : "OLAMI-App-Secret"
-}
