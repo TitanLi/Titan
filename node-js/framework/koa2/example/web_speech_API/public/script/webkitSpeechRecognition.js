@@ -1,7 +1,7 @@
-var infoBox; // 訊息 label
-var textBox; // 最終的辨識訊息 text input
-var startStopButton; // 「辨識/停止」按鈕
-var final_transcript = ''; // 最終的辨識訊息的變數
+var infoBox;
+var textBox;
+var startStopButton;
+var final_transcript = '';
 var recognizing = false; // 是否辨識中
 //引入JSON或javascript
 //https://gist.github.com/thiagodebastos/08ea551b97892d585f17
@@ -15,15 +15,15 @@ socket.on('news', function (data) {
 });
 
 function startButton(event) {
-  infoBox = document.getElementById("infoBox"); // 取得訊息控制項 infoBox
-  textBox = document.getElementById("textBox"); // 取得最終的辨識訊息控制項 textBox
-  startStopButton = document.getElementById("startStopButton"); // 取得「辨識/停止」這個按鈕控制項
-  langCombo = document.getElementById("langCombo"); // 取得「辨識語言」這個選擇控制項
+  infoBox = document.getElementById("infoBox");
+  textBox = document.getElementById("textBox");
+  startStopButton = document.getElementById("startStopButton");
+  langCombo = document.getElementById("langCombo");
   if (recognizing) { // 如果正在辨識，則停止。
     recognition.stop();
   } else { // 否則就開始辨識
-    textBox.value = ''; // 清除最終的辨識訊息
-    final_transcript = ''; // 最終的辨識訊息變數
+    textBox.value = '';
+    final_transcript = '';
     recognition.lang = langCombo.value; // 設定辨識語言
     recognition.start(); // 開始辨識
   }
@@ -38,15 +38,15 @@ if (!('webkitSpeechRecognition' in window)) {  // 如果找不到 window.webkitS
   recognition.interimResults = true; // 設定輸出中先結果。
 
   recognition.onstart = function() { // 開始辨識
-    recognizing = true; // 設定為辨識中
+    recognizing = true;
     startStopButton.style.backgroundColor = "rgba(255,0,0,0.9)"; //辨識完成更改透明度
-    infoBox.innerText = "辨識中...";  // 顯示訊息為「辨識中」...
+    infoBox.innerText = "辨識中...";
   };
 
   recognition.onend = function() { // 辨識完成
-    recognizing = false; // 設定為「非辨識中」
+    recognizing = false;
     startStopButton.style.backgroundColor = "rgba(255,0,0,0.1)"; //辨識完成更改透明度
-    infoBox.innerText = ""; // 不顯示訊息
+    infoBox.innerText = "";
   };
 
   recognition.onresult = function(event) { // 辨識有任何結果時
