@@ -5,7 +5,7 @@
 工具：[Chrome 25 版以上](https://www.google.com.tw/chrome/browser/desktop/index.html)、[工研院文字轉語音web服務](http://tts.itri.org.tw/index.php)、[歐拉蜜OLAMI](https://tw.olami.ai/wiki/?mp=sdk&content=sdk/nodejs/reference.html)
 
 架構圖：
-![web-speech-api.png](https://github.com/TitanLi/Titan/tree/master/node-js/framework/koa2/example/web_speech_API/public/img/web-speech-api.png)
+[web-speech-api.png](https://github.com/TitanLi/Titan/tree/master/node-js/framework/koa2/example/web_speech_API/public/img/web-speech-api.png)
 
 先前作業：
 
