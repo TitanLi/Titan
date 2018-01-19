@@ -26,7 +26,7 @@ var bot;
 var apiStatus = false;
 
 var options = {
-  TTStext: '您好，我是Bruce，感謝您使用工研院文字轉語音Web服務。',
+  TTStext: '您好，我是Angela',
   TTSSpeaker: 'Angela',  // Bruce, Theresa, Angela, default = Bruce
   volume: 100,          // 0 ~ 100, default = 100
   speed: 0,             // -10 ~ 10, default = 0
