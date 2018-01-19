@@ -14,11 +14,11 @@ function sortByLength(a,b){
 console.log(math.sort(["aaaa","aaa","aa","a"],sortByLength));
 
 //依序執行
-console.log(math.forEach([1,2,3],
+math.forEach([1,2,3],
 	function(value){
 		console.log(value);
 	}
-));
+);
 
 //格式處理
 //precision 指的是精準度
