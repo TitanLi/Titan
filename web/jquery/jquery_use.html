@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>進度表</title>
+    <script language="javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript">
+      // function method one
+      function pingStart(){
+        $("#pingStart").attr("disabled", true);
+        $("#pingStop").attr("disabled", false);
+      }
+
+      // function method two
+      $(function(){
+        $("#clearPingResultMsg").click(function(){
+          $("#pingResultMsg").html("");
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <div>
+      <input type="button" id="pingStart" onclick="pingStart()" value="PingStart">
+      <input type="button" id="pingStop" onclick="pingStop()" value="PingStop" disabled="disabled">
+      <input type="button" id="clearPingResultMsg" value="ClearPingResultMsg">
+    </div>
+    <div id="pingResultMsg"></div>
+  </body>
+</html>
