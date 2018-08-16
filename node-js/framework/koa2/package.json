@@ -9,13 +9,19 @@
   "author": "Titan",
   "license": "ISC",
   "dependencies": {
+    "await-busboy": "^1.0.2",
     "co-views": "^2.1.0",
+    "fs": "0.0.1-security",
     "http": "0.0.0",
     "koa": "^2.4.1",
+    "koa-body": "^4.0.4",
     "koa-bodyparser": "^4.2.0",
     "koa-json": "^2.0.2",
     "koa-logger": "^3.1.0",
     "koa-router": "^7.3.0",
+    "koa-static": "^5.0.0",
+    "os": "^0.1.1",
+    "path": "^0.12.7",
     "socket.io": "^2.0.4",
     "swig": "^1.4.2"
   }
