@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>WebSocket</title>
+    <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+    <script>
+      var wsUrl = 'ws://127.0.0.1:3000';
+
+      var websocket = new WebSocket(wsUrl);
+
+      websocket.onopen = function(evt){
+        console.log('Connected');
+        websocket.send('Hello Server!');
+      };
+
+      websocket.onclose = function(evt){
+        console.log('DisConnected');
+      };
+
+      websocket.onmessage = function(evt){
+        console.log('Got Message');
+        console.log(evt.data);
+        var msg = $('<div>').append(evt.data);
+        $('#messages').append(msg);
+      };
+
+      websocket.onerror = function(evt){
+        console.log('Something\'s wrong');
+      };
+
+      $(function(){
+        $('#send').on('click',function(){
+          websocket.send($('#msg').val());
+          $('#msg').val('');
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <input type='text' id='msg'>
+    <input type='button' value="SEND" id='send'>
+    <div id='messages'></div>
+  </body>
+</html>
