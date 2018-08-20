@@ -1,3 +1,4 @@
 node_modules/
 package-lock.json
 .DS_Store
+node-js/framework/koa2/package-lock.json
