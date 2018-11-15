@@ -21,6 +21,9 @@ class Database {
             });
         });
     }
+    test() {
+        return 'apple'
+    }
 }
 
 module.exports = Database
