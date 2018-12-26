@@ -1,15 +1,15 @@
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
-  host : 'localhost',
-  user : 'root',
-  password : 'apple'
+  host: 'localhost',
+  user: 'root',
+  password: 'apple'
 });
 
-connection.connect(function(err){
-  if(err)
-    throw err;
-
-  console.log('Connected');
-  connection.end();
+connection.connect(function (err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+  console.log('connected as id ' + connection.threadId);
 });
